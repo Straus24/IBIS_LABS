@@ -19,5 +19,19 @@ namespace ConsoleApp1
             Console.WriteLine($"Encrypted: {encryptedChar}");
             Console.WriteLine($"Decrypted: {decryptedChar}");
         }
+
+        //Метод для разделения текста на блоки
+        public static string[] SplitIntoBlocks(string text)
+        {
+            int numBlocks = (text.Length + BlockSize - 1) / BlockSize;
+            string[] blocks = new string[numBlocks];
+
+            for (int i = 0; i < numBlocks; i++)
+            {
+                int start = i * BlockSize;
+                blocks[i] = text.Substring(start, Math.Min(BlockSize, text.Length - start));
+            }
+            return blocks;
+        }
     }
 }
