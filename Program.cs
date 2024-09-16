@@ -8,30 +8,29 @@ namespace ConsoleApp1
         {
             CESAR cesar = new CESAR();
 
-            string keyWord = "ШИФР"; // Пример ключевого слова
-            char key = keyWord[0]; // Берем первый символ как ключ
-            char originalChar = 'А';
+            string originalText = "ПРИВЕТ ЦЕЗАРЬ";
+            string encryptionKey = "КЛЮЧ"; // Ключ для шифрования
 
-            char encryptedChar = CESAR.Encrypt(originalChar, key);
-            char decryptedChar = CESAR.Decrypt(encryptedChar, key);
+            string encryptedText = cesar.Encrypt(originalText, encryptionKey);
+            string decryptedText = cesar.Decrypt(encryptedText, encryptionKey);
 
-            Console.WriteLine($"Original: {originalChar}");
-            Console.WriteLine($"Encrypted: {encryptedChar}");
-            Console.WriteLine($"Decrypted: {decryptedChar}");
+            Console.WriteLine($"Original: {originalText}");
+            Console.WriteLine($"Encrypted: {encryptedText}");
+            Console.WriteLine($"Decrypted: {decryptedText}");
         }
 
         //Метод для разделения текста на блоки
-        public static string[] SplitIntoBlocks(string text)
-        {
-            int numBlocks = (text.Length + BlockSize - 1) / BlockSize;
-            string[] blocks = new string[numBlocks];
+        //public static string[] SplitIntoBlocks(string text)
+        //{
+        //    int numBlocks = (text.Length + BlockSize - 1) / BlockSize;
+        //    string[] blocks = new string[numBlocks];
 
-            for (int i = 0; i < numBlocks; i++)
-            {
-                int start = i * BlockSize;
-                blocks[i] = text.Substring(start, Math.Min(BlockSize, text.Length - start));
-            }
-            return blocks;
-        }
+        //    for (int i = 0; i < numBlocks; i++)
+        //    {
+        //        int start = i * BlockSize;
+        //        blocks[i] = text.Substring(start, Math.Min(BlockSize, text.Length - start));
+        //    }
+        //    return blocks;
+        //}
     }
 }

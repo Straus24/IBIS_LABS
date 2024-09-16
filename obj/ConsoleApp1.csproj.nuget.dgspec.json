@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Админ\\OneDrive\\Рабочий стол\\ИБИС\\ConsoleApp1\\IBIS_LABS\\ConsoleApp1.csproj": {}
+    "D:\\ИБИС\\IBIS_LABS\\ConsoleApp1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Админ\\OneDrive\\Рабочий стол\\ИБИС\\ConsoleApp1\\IBIS_LABS\\ConsoleApp1.csproj": {
+    "D:\\ИБИС\\IBIS_LABS\\ConsoleApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Админ\\OneDrive\\Рабочий стол\\ИБИС\\ConsoleApp1\\IBIS_LABS\\ConsoleApp1.csproj",
+        "projectUniqueName": "D:\\ИБИС\\IBIS_LABS\\ConsoleApp1.csproj",
         "projectName": "ConsoleApp1",
-        "projectPath": "C:\\Users\\Админ\\OneDrive\\Рабочий стол\\ИБИС\\ConsoleApp1\\IBIS_LABS\\ConsoleApp1.csproj",
+        "projectPath": "D:\\ИБИС\\IBIS_LABS\\ConsoleApp1.csproj",
         "packagesPath": "C:\\Users\\Админ\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Админ\\OneDrive\\Рабочий стол\\ИБИС\\ConsoleApp1\\IBIS_LABS\\obj\\",
+        "outputPath": "D:\\ИБИС\\IBIS_LABS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

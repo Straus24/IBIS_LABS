@@ -55,32 +55,18 @@ namespace ConsoleApp1
             }
             else
             {
-                throw new ArgumentException($"Символ '{symbol}' не найден в алфавите.");
+                return 0;
             }
         }
 
         public int SumCode(int code1, int code2)
         {
-            if (code1 + code2 > 31)
-            {
-                return code1 + code2 - 31;
-            }
-            else
-            {
-                return code1 + code2;
-            }
+            return (code1 + code2 - 1) % 31 + 1; // Сложение и циклический сдвиг
         }
 
         public int SubtractCode(int code1, int code2)
         {
-            if (code1 - code2 < 1)
-            {
-                return 31 - (code2 - code1);
-            }
-            else
-            {
-                return code1 - code2;
-            }
+            return (code1 - code2 + 30) % 31 + 1; // Вычитание и циклический сдвиг
         }
 
         public char GetSymbolByCode(int code)
