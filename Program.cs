@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace ConsoleApp1 
 {
@@ -8,30 +9,83 @@ namespace ConsoleApp1
         {
             CESAR cesar = new CESAR();
 
-            string keyWord = "ШИФР"; // Пример ключевого слова
-            char key = keyWord[0]; // Берем первый символ как ключ
-            char originalChar = 'А';
+            string originalText = "ПРИВЕТ ЦЕЗАРЬ";
+            string encryptionKey = "КЛЮЧ"; // Ключ для шифрования
 
-            char encryptedChar = CESAR.Encrypt(originalChar, key);
-            char decryptedChar = CESAR.Decrypt(encryptedChar, key);
+            Blocks blocks = new Blocks();
 
-            Console.WriteLine($"Original: {originalChar}");
-            Console.WriteLine($"Encrypted: {encryptedChar}");
-            Console.WriteLine($"Decrypted: {decryptedChar}");
-        }
+            string plainText = "ВЕГА";
+            int j = 5; // Число холостых сдвигов j
 
-        //Метод для разделения текста на блоки
-        public static string[] SplitIntoBlocks(string text)
-        {
-            int numBlocks = (text.Length + BlockSize - 1) / BlockSize;
-            string[] blocks = new string[numBlocks];
-
-            for (int i = 0; i < numBlocks; i++)
+            while (true)
             {
-                int start = i * BlockSize;
-                blocks[i] = text.Substring(start, Math.Min(BlockSize, text.Length - start));
+                Console.WriteLine("\nВыберите номер задания:");
+                Console.WriteLine("1. Шифрование текста\n2. Шифрование текста методом S-блоков");
+
+                ConsoleKeyInfo choice = Console.ReadKey();
+                Console.WriteLine();
+
+                try
+                {
+                    switch (choice.Key)
+                    {
+                        case ConsoleKey.D1:
+                            string encryptedText = cesar.Encrypt(originalText, encryptionKey);
+                            string decryptedText = cesar.Decrypt(encryptedText, encryptionKey);
+
+                            Console.WriteLine($"Original: {originalText}");
+                            Console.WriteLine($"Encrypted: {encryptedText}");
+                            Console.WriteLine($"Decrypted: {decryptedText}");
+                            break;
+                        case ConsoleKey.D2:
+                            Console.WriteLine("Original text (P): " + string.Join(", ", plainText));
+
+                            // Преобразование в телеграфные коды
+                            int[] plainTextCodes = Blocks.ConvertToTelegraphCode(plainText);
+                            Console.WriteLine("Telegraph codes: " + string.Join(", ", plainTextCodes));
+
+                            // Шифрование 
+                            int[] BlockencryptedText = Blocks.Encrypt(plainTextCodes, j);
+                            Console.WriteLine("Encrypted text (C): " + string.Join(", ", BlockencryptedText));
+
+                            // Обратное преобразование шифротекста в символы
+                            string encryptedWord = Blocks.ConvertFromTelegraphCode(BlockencryptedText);
+                            Console.WriteLine("Encrypted word (C): " + encryptedWord);
+
+                            // Расшифрование
+                            int[] BlockdecryptedText = Blocks.Decrypt(BlockencryptedText, j);
+                            Console.WriteLine("Decrypted text (P): " + string.Join(", ", BlockdecryptedText));
+
+                            // Обратное преобразование расшифрованного текста в символы
+                            string decryptedWord = Blocks.ConvertFromTelegraphCode(BlockdecryptedText);
+                            Console.WriteLine("Decrypted word (P): " + decryptedWord);
+
+                            Console.WriteLine("Check S-blocks");
+                            Blocks.TestPositionInfluence(plainTextCodes, j);
+                            Blocks.TestKeyOrder(plainTextCodes, j);
+                            Blocks.TestAvalancheEffect(plainTextCodes, j);
+
+                            break;
+                        case ConsoleKey.Escape:
+                            break;
+                        default:
+                            Console.WriteLine("Неверный выбор. Попробуйте еще раз.");
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Произошла ошибка: {ex.Message}");
+                }
             }
-            return blocks;
+            
+
+            //Проверки
+            //TestPositionInfluence(plainText, j);
+            //TestKeyOrder(plainText, j);
+            //TestAvalancheEffect(plainText, j);
         }
+
+        
     }
 }

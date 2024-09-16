@@ -1,17 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\",
+  "WorkspaceRootPath": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|c:\\users\\\u0430\u0434\u043C\u0438\u043D\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0438\u0431\u0438\u0441\\consoleapp1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|c:\\users\\\u0430\u0434\u043C\u0438\u043D\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0438\u0431\u0438\u0441\\consoleapp1\\ibis_labs\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|c:\\users\\\u0430\u0434\u043C\u0438\u043D\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0438\u0431\u0438\u0441\\consoleapp1\\alphabet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\alphabet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|solutionrelative:alphabet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|c:\\users\\\u0430\u0434\u043C\u0438\u043D\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0438\u0431\u0438\u0441\\consoleapp1\\cesar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\cesar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|solutionrelative:cesar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -28,35 +28,33 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "CESAR.cs",
-              "DocumentMoniker": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\CESAR.cs",
+              "DocumentMoniker": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\CESAR.cs",
               "RelativeDocumentMoniker": "CESAR.cs",
-              "ToolTip": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\CESAR.cs",
+              "ToolTip": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\CESAR.cs",
               "RelativeToolTip": "CESAR.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T12:45:59.512Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-15T12:45:59.512Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "ALPHABET.cs",
-              "DocumentMoniker": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\ALPHABET.cs",
+              "DocumentMoniker": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\ALPHABET.cs",
               "RelativeDocumentMoniker": "ALPHABET.cs",
-              "ToolTip": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\ALPHABET.cs",
+              "ToolTip": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\ALPHABET.cs",
               "RelativeToolTip": "ALPHABET.cs",
               "ViewState": "AQIAAD8AAAAAAAAAAAAwwFsAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T12:41:46.938Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-15T12:41:46.938Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\Program.cs",
+              "ToolTip": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\Program.cs",
               "RelativeToolTip": "Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

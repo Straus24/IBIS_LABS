@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Виктория\\Downloads\\IBIS_LABS-main\\IBIS_LABS-main\\ConsoleApp1.csproj": {}
+    "C:\\Users\\Виктория\\Desktop\\Study\\4 курс\\БИС\\IBIS_LABS-main\\ConsoleApp1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Виктория\\Downloads\\IBIS_LABS-main\\IBIS_LABS-main\\ConsoleApp1.csproj": {
+    "C:\\Users\\Виктория\\Desktop\\Study\\4 курс\\БИС\\IBIS_LABS-main\\ConsoleApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Виктория\\Downloads\\IBIS_LABS-main\\IBIS_LABS-main\\ConsoleApp1.csproj",
+        "projectUniqueName": "C:\\Users\\Виктория\\Desktop\\Study\\4 курс\\БИС\\IBIS_LABS-main\\ConsoleApp1.csproj",
         "projectName": "ConsoleApp1",
-        "projectPath": "C:\\Users\\Виктория\\Downloads\\IBIS_LABS-main\\IBIS_LABS-main\\ConsoleApp1.csproj",
+        "projectPath": "C:\\Users\\Виктория\\Desktop\\Study\\4 курс\\БИС\\IBIS_LABS-main\\ConsoleApp1.csproj",
         "packagesPath": "C:\\Users\\Виктория\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Виктория\\Downloads\\IBIS_LABS-main\\IBIS_LABS-main\\obj\\",
+        "outputPath": "C:\\Users\\Виктория\\Desktop\\Study\\4 курс\\БИС\\IBIS_LABS-main\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Виктория\\AppData\\Roaming\\NuGet\\NuGet.Config",

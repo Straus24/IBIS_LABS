@@ -15,20 +15,52 @@ namespace ConsoleApp1
              alphabet = new TelegraphAlphabet();
         }
 
-        public static char Encrypt(char input, char key)
+        public string Encrypt(string text, string key)
         {
-            byte inputCode = alphabet.GetCode(input);
-            byte keyCode = alphabet.GetCode(key);
-            int encryptedCode = alphabet.SumCode(inputCode, keyCode);
-            return alphabet.GetSymbolByCode(encryptedCode);
+            StringBuilder encryptedText = new StringBuilder();
+            int keyIndex = 0;
+            foreach (char c in text)
+            {
+                if (alphabet.GetCode(c) != 0) // Проверяем, есть ли код
+                {
+                    char keyChar = key[keyIndex % key.Length]; // Повторяем ключ
+                    byte textCode = alphabet.GetCode(c);
+                    byte keyCode = alphabet.GetCode(keyChar);
+                    int encryptedCode = alphabet.SumCode(textCode, keyCode);
+                    encryptedText.Append(alphabet.GetSymbolByCode(encryptedCode));
+
+                    keyIndex++;
+                }
+                else
+                {
+                    encryptedText.Append(c); // Неизменяем символы, не входящие в алфавит
+                }
+            }
+            return encryptedText.ToString();
         }
 
-        public static char Decrypt(char input, char key)
+        public string Decrypt(string text, string key)
         {
-            byte inputCode = alphabet.GetCode(input);
-            byte keyCode = alphabet.GetCode(key);
-            int decryptedCode = alphabet.SubtractCode(inputCode, keyCode);
-            return alphabet.GetSymbolByCode(decryptedCode);
+            StringBuilder decryptedText = new StringBuilder();
+            int keyIndex = 0;
+            foreach (char c in text)
+            {
+                if (alphabet.GetCode(c) != 0) // Проверяем, есть ли код
+                {
+                    char keyChar = key[keyIndex % key.Length]; // Повторяем ключ
+                    byte textCode = alphabet.GetCode(c);
+                    byte keyCode = alphabet.GetCode(keyChar);
+                    int decryptedCode = alphabet.SubtractCode(textCode, keyCode);
+                    decryptedText.Append(alphabet.GetSymbolByCode(decryptedCode));
+
+                    keyIndex++;
+                }
+                else
+                {
+                    decryptedText.Append(c); // Неизменяем символы, не входящие в алфавит
+                }
+            }
+            return decryptedText.ToString();
         }
     }
 }
