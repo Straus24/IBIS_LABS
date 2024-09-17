@@ -24,11 +24,13 @@ namespace ConsoleApp1
             }
 
             int[] cipherText = new int[BlockSize];
+            int previousCipher = 0; // Вектор инициализации для первого символа
 
             for (int i = 0; i < BlockSize; i++)
             {
                 // Применение ключа и холостого сдвига j
-                cipherText[i] = (plainText[i] + key[i] + j) % Moduls;
+                cipherText[i] = (plainText[i] + key[i] + j + previousCipher) % Moduls;
+                previousCipher = cipherText[i];
             }
 
             return cipherText;
@@ -43,11 +45,13 @@ namespace ConsoleApp1
             }
 
             int[] plainText = new int[BlockSize];
+            int previousCipher = 0;
 
             for (int i = 0; i < BlockSize; i++)
             {
                 // Обратный сдвиг с учетом ключа и холостого сдвига j
-                plainText[i] = (cipherText[i] - key[i] - j) % Moduls;
+                plainText[i] = (cipherText[i] - key[i] - j - previousCipher + Moduls) % Moduls;
+                previousCipher = cipherText[i];
             }
 
             return plainText;
@@ -138,14 +142,26 @@ namespace ConsoleApp1
 
             Console.WriteLine("Modified encrypted text: " + string.Join(", ", modifiedEncryptedText) + " -> " + modifiedEncryptedWord);
 
-            // Сравнение результатов 
+            // Сравнение результатов и подсчет измененных символов
+            int changesCount = 0;
             Console.WriteLine("Comparing original and modified encrtypted text:");
             for (int i = 0; i < BlockSize; i++)
             {
                 if (encryptedText[i] != modifiedEncryptedText[i])
                 {
                     Console.WriteLine($"Position {i} differs: {encryptedText[i]} -> {modifiedEncryptedText[i]}");
+                    changesCount++;
                 }
+            }
+
+            // Проверяем, изменилось ли больше одного символа
+            if (changesCount > 1)
+            {
+                Console.WriteLine($"\nAvalanche effect confirmed: {changesCount} characters were changed in the ciphertext.");
+            }
+            else
+            {
+                Console.WriteLine("\nNo avalanche effect: Only one character was changed in the ciphertext.");
             }
         }
     }
