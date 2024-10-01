@@ -66,6 +66,36 @@ namespace ConsoleApp1
                             Blocks.TestAvalancheEffect(plainTextCodes, j);
 
                             break;
+
+                        case ConsoleKey.D3:
+                            int[] plainTextCodes2 = Blocks.ConvertToTelegraphCode(plainText);
+                            long value = Blocks.BlockToLong(plainTextCodes2);
+                            int[] BitArray = Blocks.ToBinaryArray(value);
+                            Console.WriteLine($"Блок = {string.Join("", plainTextCodes2)}");
+                            Console.WriteLine($"Блок в 64-битное число = {value}");
+                            Console.WriteLine($"Целое число в битах = {string.Join("", BitArray)}");
+                            Console.WriteLine($"Биты в 64-битное число = {Blocks.FromBinaryArray(BitArray)}");
+                            Console.WriteLine($"64-битное в блок = {string.Join("", Blocks.LongToBlock(Blocks.FromBinaryArray(BitArray)))}");
+
+                            // Работа односторонней функции
+                            string constant = "КОНСТАНТА";
+                            int rounds = 5;
+                            long oneWayResult = Blocks.OneWayFunction(value, constant, rounds);
+                            Console.WriteLine($"Результат односторонней функции после {rounds} раундов: {oneWayResult}");
+
+                            // Работа LCG
+                            long a = 5, c = 3, m = 1048576; // Коэффициенты для LCG
+                            LCG generator = new LCG(a, c, m);
+                            long lcgResult = generator.Next(value);
+                            Console.WriteLine($"Результат работы LCG: {lcgResult}");
+
+                            // Работа EnhancedLCG
+                            long initialState = 12345;
+                            EnhancedLCG enhancedGenerator = new EnhancedLCG(a, c, m, initialState);
+                            long enhancedLcgResult = enhancedGenerator.Next(value);
+                            Console.WriteLine($"Результат работы EnhancedLCG: {enhancedLcgResult}");
+
+                            break;
                         case ConsoleKey.Escape:
                             break;
                         default:

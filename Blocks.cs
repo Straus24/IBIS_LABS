@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,51 @@ namespace ConsoleApp1
     {
         private const int BlockSize = 4; // Размер блока - 4 символа
         private const int Moduls = 32; // Числовой диапазон [0, 31]
+        private const int BitSize = 20; // 20 бит для блока символов
+
+        // Функция конвертации блока в 64-битное число
+        public static long BlockToLong(int[] block)
+        {
+            long result = 0;
+            for (int i = 0; i < BlockSize; i++)
+            {
+                result |= (long)block[i] << (i * 5); // Каждый символ занимает 5 бит
+            }
+            return result;
+        }
+
+        // Функция конвертации 64-битного числа обратно в блок символов
+        public static int[] LongToBlock(long value)
+        {
+            int[] block = new int[BlockSize];
+            for (int i = 0; i < BlockSize; i++) 
+            {
+                block[i] = (int)((value >> (i * 5)) & 0x1F); // Вытаскиваем по 5 бит для каждого символа
+            }
+            return block;
+        }
+
+        // Преобразование числа в массив двоичных значений (20 бит)
+        public static int[] ToBinaryArray(long value)
+        {
+            int[] binaryArray = new int[BitSize];
+            for (int i = 0; i < BitSize; i++)
+            {
+                binaryArray[i] = (int)((value >> i) & 1); // Заполняем массив двоичных значений
+            }
+            return binaryArray;
+        }
+
+        // Преобразование массива двоичных значений обратно в число
+        public static long FromBinaryArray(int[] binaryArray)
+        {
+            long result = 0;
+            for (int i = 0; i < BitSize; i++)
+            {
+                result |= (long)binaryArray[i] << i;
+            }
+            return result;
+        }
 
         // Основной ключ - массив целых чисел
         private static readonly int[] key = { 3, 1, 7, 4 }; // Пример ключа для шифрования
@@ -76,6 +122,28 @@ namespace ConsoleApp1
                 chars[i] = alphabet.GetSymbolByCode(codes[i]);
             }
             return new string(chars);
+        }
+
+        public static long OneWayFunction(long input, string constant, int rounds)
+        {
+            long result = input;
+            for (int round = 0; round < rounds; round++)
+            {
+                result = ApplySBlock(result, constant, round);
+            }
+            return result;
+        }
+
+        private static long ApplySBlock(long value, string constant, int round)
+        {
+            int[] block = LongToBlock(value);
+
+            for (int i = 0; i < block.Length; i++)
+            {
+                block[i] = (block[i] + key[i % key.Length] + constant[round % constant.Length]) % 32;
+            }
+
+            return BlockToLong(block);
         }
 
         // Проверка 1: Влияние позиции символа в блоке
