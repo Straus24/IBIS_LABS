@@ -12,18 +12,21 @@ namespace ConsoleApp1
         private long a;
         private long c;
         private long m;
+        private long currentState;
 
-        public LCG(long a, long c, long m)
+        public LCG(long a, long c, long m, long seed)
         {
             this.a = a;
             this.c = c;
             this.m = m;
+            currentState = seed;
         }
 
         // Функция генерации нового состояния
-        public long Next(long seed)
+        public long Next()
         {
-            return (a * seed + c) % m;
+            currentState = (a * currentState + c) % m;
+            return currentState;
         }
     }
 

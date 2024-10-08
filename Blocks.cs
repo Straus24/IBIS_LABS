@@ -137,10 +137,11 @@ namespace ConsoleApp1
         private static long ApplySBlock(long value, string constant, int round)
         {
             int[] block = LongToBlock(value);
+            int[] key = constant.Select(c => (int)c).ToArray(); // Преобразуем строку в числовой массив
 
             for (int i = 0; i < block.Length; i++)
             {
-                block[i] = (block[i] + key[i % key.Length] + constant[round % constant.Length]) % 32;
+                block[i] = (block[i] + key[i % key.Length] + round) % 32; // Простое шифрование
             }
 
             return BlockToLong(block);
