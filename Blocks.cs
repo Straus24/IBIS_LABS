@@ -16,10 +16,15 @@ namespace ConsoleApp1
         // Функция конвертации блока в 64-битное число
         public static long BlockToLong(int[] block)
         {
+            if (block.Length != BlockSize)
+            {
+                throw new ArgumentException($"Длина блока должна быть {BlockSize}.");
+            }
+
             long result = 0;
             for (int i = 0; i < BlockSize; i++)
             {
-                result |= (long)block[i] << (i * 5); // Каждый символ занимает 5 бит
+                result |= (long)block[i] << (5 * (BlockSize - 1 - i)); // Каждый символ занимает 5 бит
             }
             return result;
         }
@@ -30,7 +35,7 @@ namespace ConsoleApp1
             int[] block = new int[BlockSize];
             for (int i = 0; i < BlockSize; i++) 
             {
-                block[i] = (int)((value >> (i * 5)) & 0x1F); // Вытаскиваем по 5 бит для каждого символа
+                block[i] = (int)((value >> (5 * (BlockSize - 1 - i))) & 0x1F); // Вытаскиваем по 5 бит для каждого символа
             }
             return block;
         }
@@ -41,7 +46,7 @@ namespace ConsoleApp1
             int[] binaryArray = new int[BitSize];
             for (int i = 0; i < BitSize; i++)
             {
-                binaryArray[i] = (int)((value >> i) & 1); // Заполняем массив двоичных значений
+                binaryArray[BitSize - 1 - i] = (int)((value >> i) & 1); // Заполняем массив двоичных значений от старшего бита к младшему
             }
             return binaryArray;
         }
@@ -49,10 +54,15 @@ namespace ConsoleApp1
         // Преобразование массива двоичных значений обратно в число
         public static long FromBinaryArray(int[] binaryArray)
         {
+            if (binaryArray.Length != BitSize)
+            {
+                throw new ArgumentException($"Длина массива должна быть {BitSize}.");
+            }
+
             long result = 0;
             for (int i = 0; i < BitSize; i++)
             {
-                result |= (long)binaryArray[i] << i;
+                result |= (long)binaryArray[BitSize - 1 - i] << i; // Читаем биты начиная с самого старшего
             }
             return result;
         }
@@ -111,6 +121,7 @@ namespace ConsoleApp1
             {
                 codes[i] = alphabet.GetCode(input[i]);
             }
+
             return codes;
         }
 
@@ -127,24 +138,32 @@ namespace ConsoleApp1
         public static long OneWayFunction(long input, string constant, int rounds)
         {
             long result = input;
+            // Добавляем "ТПУ" к константе и формируем ключ
+            string modifiedConstant = "ТПУ" + constant + constant.Substring(0, 4);
+            int[] key = modifiedConstant.Select(c => (int)c).ToArray(); // Преобразуем строку в числовой массив
+
             for (int round = 0; round < rounds; round++)
             {
-                result = ApplySBlock(result, constant, round);
+                int q = (round * 4) % key.Length + 3; // Смещение q для текущего раунда
+                result = ApplySBlock(result, key, q, round);
             }
+
+            Console.WriteLine($"{result}");
             return result;
         }
 
-        private static long ApplySBlock(long value, string constant, int round)
+        private static long ApplySBlock(long value, int[] key, int q, int round)
         {
-            int[] block = LongToBlock(value);
-            int[] key = constant.Select(c => (int)c).ToArray(); // Преобразуем строку в числовой массив
+            int[] block = LongToBlock(value); // Преобразуем входной блок в массив символов
+            int[] tempKey = key.Skip(q - 4).Take(4).ToArray(); // Временный ключ для текущего раунда
 
             for (int i = 0; i < block.Length; i++)
             {
-                block[i] = (block[i] + key[i % key.Length] + round) % 32; // Простое шифрование
+                // Применяем операцию по схеме с учетом ключа и раунда
+                block[i] = (block[i] + tempKey[i % tempKey.Length] + round) % 32; // S-блок
             }
 
-            return BlockToLong(block);
+            return BlockToLong(block); // Преобразуем блок обратно в число
         }
 
         // Проверка 1: Влияние позиции символа в блоке

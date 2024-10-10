@@ -14,7 +14,7 @@ namespace ConsoleApp1
 
             Blocks blocks = new Blocks();
 
-            string plainText = "КОЛА";
+            string plainText = "ВАСЯ";
             int j = 5; // Число холостых сдвигов j
 
             while (true)
@@ -78,16 +78,12 @@ namespace ConsoleApp1
                             Console.WriteLine($"64-битное в блок = {string.Join("", Blocks.LongToBlock(Blocks.FromBinaryArray(BitArray)))}");
 
                             // Работа односторонней функции
-                            string constant = "КОНСТАНТА";
+                            Console.WriteLine("Работа односторонней функции: ");
+                            string constant = "ББББ";
                             int rounds = 5;
-                            long oneWayResult = Blocks.OneWayFunction(value, constant, rounds);
-                            Console.WriteLine($"Результат односторонней функции после {rounds} раундов: {oneWayResult}");
-
-                            //// Работа LCG
-                            //long a = 5, c = 3, m = 1048576; // Коэффициенты для LCG
-                            //LCG generator = new LCG(a, c, m);
-                            //long lcgResult = generator.Next(value);
-                            //Console.WriteLine($"Результат работы LCG: {lcgResult}");
+                            long Oneway = Blocks.OneWayFunction(value, constant, rounds);
+                            int[] OneWay = Blocks.LongToBlock(Oneway);
+                            string res = Blocks.ConvertFromTelegraphCode(OneWay);
 
                             // Работа EnhancedLCG
                             long a = 723482, c = 8677, m = 983609;
