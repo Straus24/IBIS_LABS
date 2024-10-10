@@ -14,8 +14,9 @@ namespace ConsoleApp1
 
             Blocks blocks = new Blocks();
 
-            string plainText = "ВАСЯ";
-            int j = 5; // Число холостых сдвигов j
+            string plainText = "БЛОК";
+            string key = "ЗВЁЗДНАЯ_НОЧЬ"; // Пример ключа для шифрования
+            int j = 11; // Число холостых сдвигов j
 
             while (true)
             {
@@ -45,25 +46,25 @@ namespace ConsoleApp1
                             Console.WriteLine("Telegraph codes: " + string.Join(", ", plainTextCodes));
 
                             // Шифрование 
-                            int[] BlockencryptedText = Blocks.Encrypt(plainTextCodes, j);
+                            int[] BlockencryptedText = Blocks.Encrypt(plainTextCodes, Blocks.ConvertToTelegraphCode(key).ToString(), j);
                             Console.WriteLine("Encrypted text (C): " + string.Join(", ", BlockencryptedText));
 
                             // Обратное преобразование шифротекста в символы
                             string encryptedWord = Blocks.ConvertFromTelegraphCode(BlockencryptedText);
                             Console.WriteLine("Encrypted word (C): " + encryptedWord);
 
-                            // Расшифрование
-                            int[] BlockdecryptedText = Blocks.Decrypt(BlockencryptedText, j);
-                            Console.WriteLine("Decrypted text (P): " + string.Join(", ", BlockdecryptedText));
+                            //    // Расшифрование
+                            //    int[] BlockdecryptedText = Blocks.Decrypt(BlockencryptedText, j);
+                            //    Console.WriteLine("Decrypted text (P): " + string.Join(", ", BlockdecryptedText));
 
-                            // Обратное преобразование расшифрованного текста в символы
-                            string decryptedWord = Blocks.ConvertFromTelegraphCode(BlockdecryptedText);
-                            Console.WriteLine("Decrypted word (P): " + decryptedWord);
+                            //    // Обратное преобразование расшифрованного текста в символы
+                            //    string decryptedWord = Blocks.ConvertFromTelegraphCode(BlockdecryptedText);
+                            //    Console.WriteLine("Decrypted word (P): " + decryptedWord);
 
-                            Console.WriteLine("Check S-blocks");
-                            Blocks.TestPositionInfluence(plainTextCodes, j);
-                            Blocks.TestKeyOrder(plainTextCodes, j);
-                            Blocks.TestAvalancheEffect(plainTextCodes, j);
+                            //    Console.WriteLine("Check S-blocks");
+                            //    Blocks.TestPositionInfluence(plainTextCodes, j);
+                            //    Blocks.TestKeyOrder(plainTextCodes, j);
+                            //    Blocks.TestAvalancheEffect(plainTextCodes, j);
 
                             break;
 
@@ -81,25 +82,24 @@ namespace ConsoleApp1
                             Console.WriteLine("Работа односторонней функции: ");
                             string constant = "ББББ";
                             int rounds = 5;
-                            long Oneway = Blocks.OneWayFunction(value, constant, rounds);
-                            int[] OneWay = Blocks.LongToBlock(Oneway);
-                            string res = Blocks.ConvertFromTelegraphCode(OneWay);
+                            Blocks.OneWayFunction(plainTextCodes2, constant, rounds);
+
 
                             // Работа EnhancedLCG
-                            long a = 723482, c = 8677, m = 983609;
-                            long initialState = value;
+                            //long a = 723482, c = 8677, m = 983609;
+                            //long initialState = value;
 
-                            EnhancedLCG enhGen = new EnhancedLCG(a, c, m, initialState);
+                            //EnhancedLCG enhGen = new EnhancedLCG(a, c, m, initialState);
 
-                            Console.WriteLine("Тест работы модифицированного генератора: ");
-                            for (int i = 0; i < 10; i++)
-                            {
-                                long output = enhGen.Next(initialState);
-                                int[] block = Blocks.LongToBlock(output);
-                                string text = Blocks.ConvertFromTelegraphCode(block);
+                            //Console.WriteLine("Тест работы модифицированного генератора: ");
+                            //for (int i = 0; i < 10; i++)
+                            //{
+                            //    long output = enhGen.Next(initialState);
+                            //    int[] block = Blocks.LongToBlock(output);
+                            //    string text = Blocks.ConvertFromTelegraphCode(block);
 
-                                Console.WriteLine($"Итерация {i + 1}: {output} -> {text}");
-                            }
+                            //    Console.WriteLine($"Итерация {i + 1}: {output} -> {text}");
+                            //}
 
                             break;
                         case ConsoleKey.Escape:

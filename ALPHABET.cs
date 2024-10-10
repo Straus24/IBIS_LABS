@@ -12,6 +12,7 @@ namespace ConsoleApp1
         {
             _alphabet = new Dictionary<char, byte>
 {
+                { '_', 0b00000 },
                 { 'А', 0b00001 },
                 { 'Б', 0b00010 },
                 { 'В', 0b00011 },
