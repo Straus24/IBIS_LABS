@@ -25,12 +25,8 @@ namespace ConsoleApp1
         // Функция генерации нового состояния
         public long Next()
         {
-            currentState = (a * currentState + c) % m;
-            return currentState;
+            long state = (a * currentState + c) % m;
+            return state;
         }
     }
-
-    // Пример вызова:
-    /*LCG generator = new LCG(5, 3, 1048576);*/ // a, c, m
-    /*long newSeed = generator.Next(12345);*/ // Генерация нового состояния
 }

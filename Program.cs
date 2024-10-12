@@ -88,12 +88,57 @@ namespace ConsoleApp1
                             int rounds = 5;
                             Blocks.OneWayFunction(plainTextCodes2, constant, rounds);
 
+                            // Работа базового LCG
+                            string TestString = "ЛУЛУ";
+                            int a = 723482;
+                            int c = 8677;
+                            int m = 983609;
+                            long Seed = Blocks.BlockToLong(Blocks.ConvertToTelegraphCode(TestString));
+                            LCG BaseLCG = new LCG(a, c, m, Seed);
+                            Console.WriteLine("Работа базового LCG");
+                            Console.WriteLine($"Входное слово: {TestString}");
+                            Console.Write($"Результат: {Blocks.ConvertFromTelegraphCode(Blocks.LongToBlock(BaseLCG.Next()))}");
 
                             // Работа EnhancedLCG
+                            string inputBlock = "КОЛА";
+                            Func<int[], string, int, int[]> oneWayFunction = Blocks.OneWayFunction;
+
+                            // Исправлено на long[][]
+                            long[][] seed2 = EnhancedLCG.make_seed(Blocks.ConvertToTelegraphCode(inputBlock), oneWayFunction);
+
+                            Console.WriteLine("Seed Blocks: ");
+                            foreach (var seed in seed2)
+                            {
+                                Console.WriteLine($"Seed: {Blocks.LongToBlock(seed[0])}");  // Вывод блока, преобразованного из long
+                            }
+
+                            long[] s2 = Blocks.SeedToNums(seed2);  // Преобразование seed2 в массив long
+                            Console.WriteLine("\nInitial states: ");
+                            Console.WriteLine(string.Join(", ", s2));  // Вывод начальных состояний
+
+                            // Пример параметров для генераторов
+                            long[][] set = {
+                                new long[] { 723482, 8677, 983609 },
+                                new long[] { 541223, 13571, 746517 },
+                                new long[] { 324982, 24107, 999999 }
+                            };
+
+                            // Основная часть работы LCG
+                            EnhancedLCG enhLCG = new EnhancedLCG(s2, set);
+                            for (int i = 0; i < 10; i++)
+                            {
+                                var result = enhLCG.Next();
+
+                                string blockOutput = Blocks.LongToBlock(result.Item1).ToString();  // Преобразуем вывод обратно в блок
+                                Console.WriteLine($"\nIteration {i + 1}:");
+                                Console.WriteLine($"Output Block: {blockOutput}");  // Выводим блок
+                                Console.WriteLine($"Internal States: {string.Join(", ", result.Item2)}");  // Выводим внутренние состояния
+                            }
+
                             //long a = 723482, c = 8677, m = 983609;
                             //long initialState = value;
 
-                            //EnhancedLCG enhGen = new EnhancedLCG(a, c, m, initialState);
+
 
                             //Console.WriteLine("Тест работы модифицированного генератора: ");
                             //for (int i = 0; i < 10; i++)

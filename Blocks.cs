@@ -33,7 +33,7 @@ namespace ConsoleApp1
         public static int[] LongToBlock(long value)
         {
             int[] block = new int[BlockSize];
-            for (int i = 0; i < BlockSize; i++) 
+            for (int i = 0; i < BlockSize; i++)
             {
                 block[i] = (int)((value >> (5 * (BlockSize - 1 - i))) & 0x1F); // Вытаскиваем по 5 бит для каждого символа
             }
@@ -64,6 +64,18 @@ namespace ConsoleApp1
             {
                 result |= (long)binaryArray[BitSize - 1 - i] << i; // Читаем биты начиная с самого старшего
             }
+            return result;
+        }
+
+        public static long[] SeedToNums(int[][] arrayIn)
+        {
+            long[] result = new long[arrayIn.Length];
+
+            for (int i = 0; i < arrayIn.Length; i++)
+            {
+                result[i] = BlockToLong(arrayIn[i]);
+            }
+
             return result;
         }
 
