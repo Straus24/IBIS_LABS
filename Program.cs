@@ -13,10 +13,11 @@ namespace ConsoleApp1
             string encryptionKey = "КЛЮЧ"; // Ключ для шифрования
 
             Blocks blocks = new Blocks();
+            TelegraphAlphabet telegraphAlphabet = new TelegraphAlphabet();
 
-            string plainText = "БЛОК";
-            string key = "ЗВЁЗДНАЯ_НОЧЬ"; // Пример ключа для шифрования
-            int j = 11; // Число холостых сдвигов j
+            string plainText = "ВАСЯ";
+            string key = "РОЗА"; // Пример ключа для шифрования
+            int j = 0; // Число холостых сдвигов j
 
             while (true)
             {
@@ -46,25 +47,28 @@ namespace ConsoleApp1
                             Console.WriteLine("Telegraph codes: " + string.Join(", ", plainTextCodes));
 
                             // Шифрование 
-                            int[] BlockencryptedText = Blocks.Encrypt(plainTextCodes, Blocks.ConvertToTelegraphCode(key).ToString(), j);
+                            int[] BlockencryptedText = Blocks.Encrypt(plainTextCodes, key, j);
                             Console.WriteLine("Encrypted text (C): " + string.Join(", ", BlockencryptedText));
 
                             // Обратное преобразование шифротекста в символы
-                            string encryptedWord = Blocks.ConvertFromTelegraphCode(BlockencryptedText);
-                            Console.WriteLine("Encrypted word (C): " + encryptedWord);
+                            string encryptedWord = string.Concat(BlockencryptedText.Select(code => telegraphAlphabet.GetSymbolByCode(code)));
+                            Console.WriteLine($"Encrypted word: {encryptedWord}");
 
                             //    // Расшифрование
-                            //    int[] BlockdecryptedText = Blocks.Decrypt(BlockencryptedText, j);
-                            //    Console.WriteLine("Decrypted text (P): " + string.Join(", ", BlockdecryptedText));
+                            int[] BlockdecryptedText = Blocks.Decrypt(BlockencryptedText, key, j);
+                            Console.WriteLine("Decrypted text (P): " + string.Join(", ", BlockdecryptedText));
 
                             //    // Обратное преобразование расшифрованного текста в символы
-                            //    string decryptedWord = Blocks.ConvertFromTelegraphCode(BlockdecryptedText);
-                            //    Console.WriteLine("Decrypted word (P): " + decryptedWord);
+                            string decryptedWord = Blocks.ConvertFromTelegraphCode(BlockdecryptedText);
+                            Console.WriteLine("Decrypted word (P): " + decryptedWord);
 
-                            //    Console.WriteLine("Check S-blocks");
-                            //    Blocks.TestPositionInfluence(plainTextCodes, j);
-                            //    Blocks.TestKeyOrder(plainTextCodes, j);
-                            //    Blocks.TestAvalancheEffect(plainTextCodes, j);
+                            // Модифицированный S-блок
+                            Console.WriteLine("Результат: " + string.Join(", ", Blocks.FrwCesarM(plainTextCodes, key, j)));
+
+                            Console.WriteLine("Check S-blocks");
+                            Blocks.TestPositionInfluence(plainTextCodes, key, j);
+                            Blocks.TestKeyOrder(plainTextCodes, key, j);
+                            Blocks.TestAvalancheEffect(plainTextCodes, key, j);
 
                             break;
 
@@ -103,7 +107,7 @@ namespace ConsoleApp1
 
                             break;
                         case ConsoleKey.Escape:
-                            break;
+                            return;
                         default:
                             Console.WriteLine("Неверный выбор. Попробуйте еще раз.");
                             break;
@@ -114,14 +118,6 @@ namespace ConsoleApp1
                     Console.WriteLine($"Произошла ошибка: {ex.Message}");
                 }
             }
-            
-
-            //Проверки
-            //TestPositionInfluence(plainText, j);
-            //TestKeyOrder(plainText, j);
-            //TestAvalancheEffect(plainText, j);
-        }
-
-        
+        }        
     }
 }

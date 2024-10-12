@@ -80,35 +80,53 @@ namespace ConsoleApp1
             }
 
             int[] cipherText = new int[BlockSize];
-            int previousCipher = 0; // Вектор инициализации для первого символа
+            int keyLength = key.Length;
+
+            // Начальное значение элементарного ключа
+            int elementaryKey = alphabet.GetCode('_');  // k(0) = '_'
 
             for (int i = 0; i < BlockSize; i++)
             {
-                // Применение ключа и холостого сдвига j
-                cipherText[i] = (plainText[i] + key[i] + j + previousCipher) % Moduls;
-                previousCipher = cipherText[i];
+                // Циклическое использование ключа
+                int q = (i + j) % keyLength;
+                int keyCharCode = alphabet.GetCode(key[q]);
+
+                // Генерация элементарного ключа
+                elementaryKey = (elementaryKey + keyCharCode) % Moduls;
+
+                // Шифрование с использованием элементарного ключа
+                cipherText[i] = (plainText[i] + elementaryKey) % Moduls;
             }
 
             return cipherText;
         }
 
+
         //Метод расшифрования с учетом ключа и холостого сдвига j
-        public static int[] Decrypt(int[] cipherText, int j)
+        public static int[] Decrypt(int[] cipherText, string key, int j)
         {
-            int[] key = { 3, 1, 7, 4 };
             if (cipherText.Length != BlockSize)
             {
-                throw new ArgumentException($"Cipher text must be {BlockSize} integers long");
+                throw new ArgumentException($"Input text must be {BlockSize} integers long");
             }
 
             int[] plainText = new int[BlockSize];
-            int previousCipher = 0;
+            int keyLength = key.Length;
+
+            // Начальное значение элементарного ключа
+            int elementaryKey = alphabet.GetCode('_');  // k(0) = '_'
 
             for (int i = 0; i < BlockSize; i++)
             {
-                // Обратный сдвиг с учетом ключа и холостого сдвига j
-                plainText[i] = (cipherText[i] - key[i] - j - previousCipher + Moduls) % Moduls;
-                previousCipher = cipherText[i];
+                // Циклическое использование ключа
+                int q = (i + j) % keyLength;
+                int keyCharCode = alphabet.GetCode(key[q]);
+
+                // Генерация элементарного ключа
+                elementaryKey = (elementaryKey + keyCharCode) % Moduls;
+
+                // Расшифрование с использованием элементарного ключа
+                plainText[i] = (cipherText[i] - elementaryKey + Moduls) % Moduls;
             }
 
             return plainText;
@@ -136,141 +154,211 @@ namespace ConsoleApp1
             return new string(chars);
         }
 
-        public static string OneWayFunction(int[] blockIn, string constIn, int nIn)
+        public static int[][] ConvertKeyToTelegraphCode(string key)
         {
-            int[] data = blockIn;
+            int totalBlocks = (int)Math.Ceiling(key.Length / (double)BlockSize);
+            int[][] keyBlocks = new int[totalBlocks][];
+
+            for (int i = 0; i < totalBlocks; i++)
+            {
+                string keyBlock = key.Substring(i * BlockSize, Math.Min(BlockSize, key.Length -  i * BlockSize));
+                keyBlocks[i] = ConvertToTelegraphCode(keyBlock);
+            }
+
+            return keyBlocks;
+        }
+
+
+        // Односторонняя функция
+        public static int[] OneWayFunction(int[] blockIn, string constIn, int nIn)
+        {
+            if (constIn.Length < 4)
+            {
+                throw new ArgumentException("constIn must have at least 4 characters.");
+            }
+
+            // Исходное слово
+            int[] data = new int[blockIn.Length];
+            data = blockIn;
+
             int c = constIn.Length;
 
+            // Создание константы C
             string C = "ТПУ" + constIn + constIn.Substring(0, 4);
+            string key = C.Substring(3, 4); // Начальный ключ
 
-            string key = C.Substring(3, 4);
-
-            Console.WriteLine($"Начальные данные: {ConvertFromTelegraphCode(data)}");
-
+            // Выполнение n раундов
             for (int i = 0; i < nIn; i++)
             {
-                int q = (i * 4) % c + 3;
-                int[] tmp = Encrypt(data, key, 0);
+                int q = ((i * 4) % c) + 3;
 
-                Console.WriteLine($"Раунд {i + 1}, данные: {ConvertFromTelegraphCode(tmp)}");
+                Console.Write($"Раунд {i + 1}: ");
+                // Шифруем данные с текущим ключом
+                int[] tmp = FrwCesarM(data, key, 0);
+                Console.WriteLine();
 
+                // Получаем результат шифрования
                 int s = (int)(BlockToLong(tmp) % 4);
-                key = AddText(tmp, C.Substring(q - s, 4));
 
-                data = tmp;
+                // Обновление ключа с использованием новой части ключа
+                key = AddText(ConvertFromTelegraphCode(tmp), C.Substring(q - s, Math.Min(4, C.Length - (q - s))));
             }
 
-            return BlockToString(data);
+            return data; // Возвращаем итоговые данные
         }
 
-        private static string AddText(int[] block, string str)
+        public static string AddText(string str1, string str2)
         {
-            // Преобразуем блок в строковое представление
-            char[] blockChars = block.Select(b => (char)(b % 32)).ToArray();
-            string blockString = new string(blockChars);
-
-            string updateKey = blockString + str;
-
-            if (updateKey.Length > 4)
+            if (str1.Length != str2.Length)
             {
-                updateKey = updateKey.Substring(0, 4);
+                throw new ArgumentException("Strings must have the same length");
             }
 
-            return updateKey;
+            string result = "";
+            for (int i = 0; i < str1.Length; i++)
+            {
+                // Корректное сложение кодов символов
+                int code1 = alphabet.GetCode(str1[i]);
+                int code2 = alphabet.GetCode(str2[i]);
+                int sum = (code1 + code2) % 32;
+
+                result += alphabet.GetSymbolByCode(sum);
+            }
+            return result;
         }
 
-        private static string BlockToString(int[] block) 
+
+        // Объединение обычного преобразования и модицифированного (необходимо для односторонней функции)
+        public static int[] FrwCesarM(int[] blockIn, string keyIn, int jIn)
         {
-            // Преобразуем блок в строку
-            return string.Join(" ", block.Select(b => b.ToString()));
+            int[] tmp = Encrypt(blockIn, keyIn, jIn);
+            return ImprovedEncrypt(tmp, keyIn, jIn);
+        }
+
+        // Модифицированное преобразование S-блока
+
+        public static int[] ImprovedEncrypt(int[] plainText, string key, int j)
+        {
+            if (plainText.Length != BlockSize)
+            {
+                throw new ArgumentException($"Input text must be {BlockSize} integers long");
+            }
+
+            // Удвоение ключа, если j больше длины ключа
+            string t = key;
+            while (j > t.Length - 4)
+            {
+                t += t;
+            }
+
+            // Получение подстроки ключа длиной 4 символа
+            string keySubstring = t.Substring(j, 4);
+            int[] k = ConvertToTelegraphCode(keySubstring); // Преобразуем подстроку в массив телеграфных кодов
+            int[] b = plainText; // Входной текст (прошедший через Encrypt)
+
+            // Вычисление q: сумма элементов ключа mod 4
+            int q = (k[0] + k[1] + k[2] + k[3]) % 4;
+
+            // Шифрование
+            for (int i = 0; i < 3; i++)  
+            {
+                int jIndex = (q + i + 1) % 4;  // Индекс следующего символа
+                int lIndex = (q + i) % 4;      // Индекс текущего символа
+
+                // Применение суммы кодов с циклическим сдвигом
+                b[jIndex] = (b[jIndex] + b[lIndex]) % 32; // Меняем символы на основе текущего и предыдущего
+            }
+
+            // Возвращаем зашифрованный текст
+            Console.WriteLine(ConvertFromTelegraphCode(b));
+            return b;
         }
 
         // Проверка 1: Влияние позиции символа в блоке
-        //public static void TestPositionInfluence(int[] plainText, int j)
-        //{
-        //    int[] key = { 3, 1, 7, 4 };
-        //    Console.WriteLine("\nTesting position influence:");
+        public static void TestPositionInfluence(int[] plainText, string key, int j)
+        {
+            Console.WriteLine("\nTesting position influence:");
 
-        //    for (int i = 0; i < BlockSize; i++)
-        //    {
-        //        int[] modifiedText = (int[])plainText.Clone();
-        //        modifiedText[i] = (modifiedText[i] + 1) % Moduls; // Изменяем один символ в блоке
+            for (int i = 0; i < BlockSize; i++)
+            {
+                int[] modifiedText = (int[])plainText.Clone();
+                modifiedText[i] = (modifiedText[i] + 1) % Moduls; // Изменяем один символ в блоке
 
-        //        int[] modifiedEncryptedText = Encrypt(modifiedText, j);
+                int[] modifiedEncryptedText = Encrypt(modifiedText, key, j);
 
-        //        string originalWord = ConvertFromTelegraphCode(plainText);
-        //        string modifiedWord = ConvertFromTelegraphCode(modifiedText);
-        //        string encryptedWord = ConvertFromTelegraphCode(modifiedEncryptedText);
+                string originalWord = ConvertFromTelegraphCode(plainText);
+                string modifiedWord = ConvertFromTelegraphCode(modifiedText);
+                string encryptedWord = ConvertFromTelegraphCode(modifiedEncryptedText);
 
-        //        Console.WriteLine($"Original text at position {i}: {string.Join(", ", plainText)} -> {originalWord}");
-        //        Console.WriteLine($"Modified text at position {i}: {string.Join(", ", modifiedText)} -> {modifiedWord}");
-        //        Console.WriteLine($"Encrypted result: {string.Join(", ", modifiedEncryptedText)} -> {encryptedWord}");
-        //    }
-        //}
+                Console.WriteLine($"Original text at position {i}: {string.Join(", ", plainText)} -> {originalWord}");
+                Console.WriteLine($"Modified text at position {i}: {string.Join(", ", modifiedText)} -> {modifiedWord}");
+                Console.WriteLine($"Encrypted result: {string.Join(", ", modifiedEncryptedText)} -> {encryptedWord}");
+            }
+        }
 
         // Проверка 2: Влияние порядка применения ключей
-        //public static void TestKeyOrder(int[] plainText, int j)
-        //{
-        //    Console.WriteLine("\nTesting key order:");
+        public static void TestKeyOrder(int[] plainText, string key, int j)
+        {
+            Console.WriteLine("\nTesting key order:");
 
-        //    // Шифрование с прямым ключом
-        //    int[] encryptedText = Encrypt(plainText, j);
-        //    string encryptedWord = ConvertFromTelegraphCode(encryptedText);
+            // Шифрование с прямым ключом
+            int[] encryptedText = Encrypt(plainText, key, j);
+            string encryptedWord = ConvertFromTelegraphCode(encryptedText);
 
-        //    Console.WriteLine("Encrypted text with original key order: " + string.Join(", ", encryptedText) + " -> " + encryptedWord);
+            Console.WriteLine("Encrypted text with original key order: " + string.Join(", ", encryptedText) + " -> " + encryptedWord);
 
-        //    // Меняем порядок ключей
-        //    Array.Reverse(key);
-        //    int[] encryptedTextReversedKey = Encrypt(plainText, j);
-        //    string encryptedWordReversed = ConvertFromTelegraphCode(encryptedTextReversedKey);
+            // Меняем порядок ключа
+            char[] reversedKeyArray = key.ToCharArray();
+            Array.Reverse(reversedKeyArray);
+            string reversedKey = new string(reversedKeyArray);
 
-        //    Console.WriteLine("Encrypted text with reversed key order: " + string.Join(", ", encryptedTextReversedKey) + " -> " + encryptedWordReversed);
+            int[] encryptedTextReversedKey = Encrypt(plainText, reversedKey, j);
+            string encryptedWordReversed = ConvertFromTelegraphCode(encryptedTextReversedKey);
 
-        //    // Восстаналиваем оригинальный ключ
-        //    Array.Reverse(key);
-        //}
+            Console.WriteLine("Encrypted text with reversed key order: " + string.Join(", ", encryptedTextReversedKey) + " -> " + encryptedWordReversed);
+        }
 
         // Проверка 3: Эффект лавины
-        //public static void TestAvalancheEffect(int[] plainText, int j)
-        //{
-        //    Console.WriteLine("\nTesting avalanche effect:");
+        public static void TestAvalancheEffect(int[] plainText, string key, int j)
+        {
+            Console.WriteLine("\nTesting avalanche effect:");
 
-        //    // Оригинальное шифрование
-        //    int[] encryptedText = Encrypt(plainText, j);
-        //    string encryptedWord = ConvertFromTelegraphCode(encryptedText);
+            // Оригинальное шифрование
+            int[] encryptedText = Encrypt(plainText, key, j);
+            string encryptedWord = ConvertFromTelegraphCode(encryptedText);
 
-        //    Console.WriteLine("Original encrypted text: " + string.Join(", ", encryptedText) + " -> " + encryptedWord);
+            Console.WriteLine("Original encrypted text: " + string.Join(", ", encryptedText) + " -> " + encryptedWord);
 
-        //    // Изменение одного символа в открытом тексте
-        //    int[] modifiedText = (int[])plainText.Clone();
-        //    modifiedText[0] = (modifiedText[0] + 1) % Moduls; // Изменение первого символа
+            // Изменение одного символа в открытом тексте
+            int[] modifiedText = (int[])plainText.Clone();
+            modifiedText[0] = (modifiedText[0] + 1) % Moduls; // Изменение первого символа
 
-        //    int[] modifiedEncryptedText = Encrypt(modifiedText, j);
-        //    string modifiedEncryptedWord = ConvertFromTelegraphCode(modifiedEncryptedText);
+            int[] modifiedEncryptedText = Encrypt(modifiedText, key, j);
+            string modifiedEncryptedWord = ConvertFromTelegraphCode(modifiedEncryptedText);
 
-        //    Console.WriteLine("Modified encrypted text: " + string.Join(", ", modifiedEncryptedText) + " -> " + modifiedEncryptedWord);
+            Console.WriteLine("Modified encrypted text: " + string.Join(", ", modifiedEncryptedText) + " -> " + modifiedEncryptedWord);
 
-        //    // Сравнение результатов и подсчет измененных символов
-        //    int changesCount = 0;
-        //    Console.WriteLine("Comparing original and modified encrtypted text:");
-        //    for (int i = 0; i < BlockSize; i++)
-        //    {
-        //        if (encryptedText[i] != modifiedEncryptedText[i])
-        //        {
-        //            Console.WriteLine($"Position {i} differs: {encryptedText[i]} -> {modifiedEncryptedText[i]}");
-        //            changesCount++;
-        //        }
-        //    }
+            // Сравнение результатов и подсчет измененных символов
+            int changesCount = 0;
+            Console.WriteLine("Comparing original and modified encrypted text:");
+            for (int i = 0; i < BlockSize; i++)
+            {
+                if (encryptedText[i] != modifiedEncryptedText[i])
+                {
+                    Console.WriteLine($"Position {i} differs: {encryptedText[i]} -> {modifiedEncryptedText[i]}");
+                    changesCount++;
+                }
+            }
 
-        //    // Проверяем, изменилось ли больше одного символа
-        //    if (changesCount > 1)
-        //    {
-        //        Console.WriteLine($"\nAvalanche effect confirmed: {changesCount} characters were changed in the ciphertext.");
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("\nNo avalanche effect: Only one character was changed in the ciphertext.");
-        //    }
-        //}
+            // Проверяем, изменилось ли больше одного символа
+            if (changesCount > 1)
+            {
+                Console.WriteLine($"\nAvalanche effect confirmed: {changesCount} characters were changed in the ciphertext.");
+            }
+            else
+            {
+                Console.WriteLine("\nNo avalanche effect: Only one character was changed in the ciphertext.");
+            }
+        }
     }
 }
