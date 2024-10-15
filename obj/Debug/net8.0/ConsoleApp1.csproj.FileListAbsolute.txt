@@ -41,3 +41,18 @@ C:\Users\Виктория\Desktop\Study\4 курс\БИС\IBIS_LABS-main\bin\Deb
 C:\Users\Виктория\Desktop\Study\4 курс\БИС\IBIS_LABS-main\bin\Debug\net8.0\ConsoleApp1.pdb
 C:\Users\Виктория\Desktop\Study\4 курс\БИС\IBIS_LABS-main\obj\Debug\net8.0\ConsoleApp1.genruntimeconfig.cache
 C:\Users\Виктория\Desktop\Study\4 курс\БИС\IBIS_LABS-main\obj\Debug\net8.0\ref\ConsoleApp1.dll
+D:\ИБИС_2\IBIS_LABS\bin\Debug\net8.0\ConsoleApp1.exe
+D:\ИБИС_2\IBIS_LABS\bin\Debug\net8.0\ConsoleApp1.deps.json
+D:\ИБИС_2\IBIS_LABS\bin\Debug\net8.0\ConsoleApp1.runtimeconfig.json
+D:\ИБИС_2\IBIS_LABS\bin\Debug\net8.0\ConsoleApp1.dll
+D:\ИБИС_2\IBIS_LABS\bin\Debug\net8.0\ConsoleApp1.pdb
+D:\ИБИС_2\IBIS_LABS\obj\Debug\net8.0\ConsoleApp1.GeneratedMSBuildEditorConfig.editorconfig
+D:\ИБИС_2\IBIS_LABS\obj\Debug\net8.0\ConsoleApp1.AssemblyInfoInputs.cache
+D:\ИБИС_2\IBIS_LABS\obj\Debug\net8.0\ConsoleApp1.AssemblyInfo.cs
+D:\ИБИС_2\IBIS_LABS\obj\Debug\net8.0\ConsoleApp1.csproj.CoreCompileInputs.cache
+D:\ИБИС_2\IBIS_LABS\obj\Debug\net8.0\ConsoleApp1.sourcelink.json
+D:\ИБИС_2\IBIS_LABS\obj\Debug\net8.0\ConsoleApp1.dll
+D:\ИБИС_2\IBIS_LABS\obj\Debug\net8.0\refint\ConsoleApp1.dll
+D:\ИБИС_2\IBIS_LABS\obj\Debug\net8.0\ConsoleApp1.pdb
+D:\ИБИС_2\IBIS_LABS\obj\Debug\net8.0\ConsoleApp1.genruntimeconfig.cache
+D:\ИБИС_2\IBIS_LABS\obj\Debug\net8.0\ref\ConsoleApp1.dll

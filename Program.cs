@@ -104,15 +104,17 @@ namespace ConsoleApp1
                             Func<int[], string, int, int[]> oneWayFunction = Blocks.OneWayFunction;
 
                             // Исправлено на long[][]
-                            long[][] seed2 = EnhancedLCG.make_seed(Blocks.ConvertToTelegraphCode(inputBlock), oneWayFunction);
+                            int[] codes = Blocks.ConvertToTelegraphCode(inputBlock);
+                            long[] longArray = codes.Select(x => (long)x).ToArray();
+                            long[][] seed2 = EnhancedLCG.make_seed(longArray, oneWayFunction);
 
                             Console.WriteLine("Seed Blocks: ");
                             foreach (var seed in seed2)
                             {
-                                Console.WriteLine($"Seed: {Blocks.LongToBlock(seed[0])}");  // Вывод блока, преобразованного из long
+                                Console.WriteLine($"Seed: {string.Join("", Blocks.LongToBlock(seed[0]))}");  // Вывод блока, преобразованного из long
                             }
-
-                            long[] s2 = Blocks.SeedToNums(seed2);  // Преобразование seed2 в массив long
+                            int[][] forSeedToNums = LongToInt32_mass.Convert(seed2);
+                            long[] s2 = Blocks.SeedToNums(forSeedToNums);  // Преобразование seed2 в массив long
                             Console.WriteLine("\nInitial states: ");
                             Console.WriteLine(string.Join(", ", s2));  // Вывод начальных состояний
 
