@@ -191,6 +191,7 @@ namespace ConsoleApp1
 
             // Исходное слово
             int[] data = new int[blockIn.Length];
+            int[] tmp = new int[blockIn.Length];
             data = blockIn;
 
             int c = constIn.Length;
@@ -204,10 +205,8 @@ namespace ConsoleApp1
             {
                 int q = ((i * 4) % c) + 3;
 
-                Console.Write($"Раунд {i + 1}: ");
                 // Шифруем данные с текущим ключом
-                int[] tmp = FrwCesarM(data, key, 0);
-                Console.WriteLine();
+                tmp = FrwCesarM(data, key, 0);
 
                 // Получаем результат шифрования
                 int s = (int)(BlockToLong(tmp) % 4);
@@ -216,7 +215,7 @@ namespace ConsoleApp1
                 key = AddText(ConvertFromTelegraphCode(tmp), C.Substring(q - s, Math.Min(4, C.Length - (q - s))));
             }
 
-            return data; // Возвращаем итоговые данные
+            return tmp; // Возвращаем итоговые данные
         }
 
         public static string AddText(string str1, string str2)
@@ -282,7 +281,7 @@ namespace ConsoleApp1
             }
 
             // Возвращаем зашифрованный текст
-            Console.WriteLine(ConvertFromTelegraphCode(b));
+            //Console.WriteLine(ConvertFromTelegraphCode(b));
             return b;
         }
 

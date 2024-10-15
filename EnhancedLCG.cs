@@ -10,11 +10,11 @@ namespace ConsoleApp1
     {
         private LCG lcg1, lcg2, lcg3;        
 
-        public EnhancedLCG(long[] state, long[][] set)
+        public EnhancedLCG(long[][] state, long[][] set)
         {         
-            lcg1 = new LCG(set[0][0], set[0][1], set[0][2], state[0]);
-            lcg2 = new LCG(set[1][0], set[1][1], set[1][2], state[1]);
-            lcg3 = new LCG(set[2][0], set[2][1], set[2][2], state[2]);
+            lcg1 = new LCG(set[0][0], set[0][1], set[0][2], state[0][0]);
+            lcg2 = new LCG(set[1][0], set[1][1], set[1][2], state[1][0]);
+            lcg3 = new LCG(set[2][0], set[2][1], set[2][2], state[2][0]);
         }
 
         // Усиленное преобразование с скрытым управлением
@@ -39,6 +39,11 @@ namespace ConsoleApp1
             }
             long[] stateOut = new long[] { first, second, control };
 
+            // Обновляем состояние генераторов
+            lcg1.SetState(first);
+            lcg2.SetState(second);
+            lcg3.SetState(control);
+
             return (output, stateOut);
         }
 
@@ -46,7 +51,8 @@ namespace ConsoleApp1
         {
             long rem = value;
             int count = 0;
-            while (rem != 0)
+
+            for (int i = 0; i < 20; i++)
             {
                 long tmp = rem % 2;
                 rem = rem / 2;
@@ -97,7 +103,7 @@ namespace ConsoleApp1
             for (int i = 0; i < 3; i++)
             {
                 int[] resultBlock = osFun(ConvertLongToIntArray(blockIn), generatorNames[i], 10); // Вызов односторонней функции
-                seeds[i] = new long[] { Blocks.BlockToLong(resultBlock) };
+                seeds[i] = [Blocks.BlockToLong(resultBlock)];
             }
 
             return seeds;

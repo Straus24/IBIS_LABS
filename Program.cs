@@ -83,10 +83,11 @@ namespace ConsoleApp1
                             Console.WriteLine($"64-битное в блок = {string.Join("", Blocks.LongToBlock(Blocks.FromBinaryArray(BitArray)))}");
 
                             // Работа односторонней функции
-                            Console.WriteLine("Работа односторонней функции: ");
+                            Console.Write("\nРабота односторонней функции: \n");
                             string constant = "ББББ";
                             int rounds = 5;
-                            Blocks.OneWayFunction(plainTextCodes2, constant, rounds);
+                            int[] resOneWay = Blocks.OneWayFunction(plainTextCodes2, constant, rounds);
+                            Console.WriteLine($"{string.Join("", Blocks.ConvertFromTelegraphCode(resOneWay))}");
 
                             // Работа базового LCG
                             string TestString = "ЛУЛУ";
@@ -95,43 +96,44 @@ namespace ConsoleApp1
                             int m = 983609;
                             long Seed = Blocks.BlockToLong(Blocks.ConvertToTelegraphCode(TestString));
                             LCG BaseLCG = new LCG(a, c, m, Seed);
-                            Console.WriteLine("Работа базового LCG");
+                            Console.WriteLine("\nРабота базового LCG");
                             Console.WriteLine($"Входное слово: {TestString}");
-                            Console.Write($"Результат: {Blocks.ConvertFromTelegraphCode(Blocks.LongToBlock(BaseLCG.Next()))}");
+                            Console.Write($"Результат: {Blocks.ConvertFromTelegraphCode(Blocks.LongToBlock(BaseLCG.Next()))}\n");
 
                             // Работа EnhancedLCG
+                            Console.WriteLine("\nРабота модифицированного LCG");
                             string inputBlock = "КОЛА";
                             Func<int[], string, int, int[]> oneWayFunction = Blocks.OneWayFunction;
 
-                            // Исправлено на long[][]
-                            long[][] seed2 = EnhancedLCG.make_seed(Blocks.ConvertToTelegraphCode(inputBlock), oneWayFunction);
-
-                            Console.WriteLine("Seed Blocks: ");
+                            int[] codes = Blocks.ConvertToTelegraphCode(inputBlock);
+                            long[] longArray = codes.Select(x => (long)x).ToArray();
+                            long[][] seed2 = EnhancedLCG.make_seed(longArray, oneWayFunction);
+                            
+                            // Вывод сгенерированных сидов
+                            Console.WriteLine("\nSeed Blocks: ");
                             foreach (var seed in seed2)
                             {
-                                Console.WriteLine($"Seed: {Blocks.LongToBlock(seed[0])}");  // Вывод блока, преобразованного из long
+                                Console.WriteLine($"Seed: {string.Join("", Blocks.ConvertFromTelegraphCode(Blocks.LongToBlock(seed[0])))}");  
                             }
+                            Console.WriteLine();
 
-                            long[] s2 = Blocks.SeedToNums(seed2);  // Преобразование seed2 в массив long
-                            Console.WriteLine("\nInitial states: ");
-                            Console.WriteLine(string.Join(", ", s2));  // Вывод начальных состояний
-
-                            // Пример параметров для генераторов
+                            // Параметры для генераторов
                             long[][] set = {
                                 new long[] { 723482, 8677, 983609 },
-                                new long[] { 541223, 13571, 746517 },
-                                new long[] { 324982, 24107, 999999 }
+                                new long[] { 252564, 9109, 961193 },
+                                new long[] { 357630, 8971, 948209 }
                             };
 
                             // Основная часть работы LCG
-                            EnhancedLCG enhLCG = new EnhancedLCG(s2, set);
+                            EnhancedLCG enhLCG = new EnhancedLCG(seed2, set);
+
                             for (int i = 0; i < 10; i++)
                             {
                                 var result = enhLCG.Next();
 
-                                string blockOutput = Blocks.LongToBlock(result.Item1).ToString();  // Преобразуем вывод обратно в блок
+                                int[] blockOutput = Blocks.LongToBlock(result.Item1);  // Преобразуем вывод обратно в блок
                                 Console.WriteLine($"\nIteration {i + 1}:");
-                                Console.WriteLine($"Output Block: {blockOutput}");  // Выводим блок
+                                Console.WriteLine($"Output Block: {string.Join(", ", Blocks.ConvertFromTelegraphCode(blockOutput))}");  // Выводим блок
                                 Console.WriteLine($"Internal States: {string.Join(", ", result.Item2)}");  // Выводим внутренние состояния
                             }
 

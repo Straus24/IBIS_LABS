@@ -28,5 +28,10 @@ namespace ConsoleApp1
             long state = (a * currentState + c) % m;
             return state;
         }
+
+        public void SetState(long newState)
+        {
+            currentState = newState;
+        }
     }
 }
