@@ -107,13 +107,13 @@ namespace ConsoleApp1
 
                             int[] codes = Blocks.ConvertToTelegraphCode(inputBlock);
                             long[] longArray = codes.Select(x => (long)x).ToArray();
-                            long[][] seed2 = EnhancedLCG.make_seed(longArray, oneWayFunction);
+                            long[] seed2 = EnhancedLCG.make_seed(longArray, oneWayFunction);
                             
                             // Вывод сгенерированных сидов
                             Console.WriteLine("\nSeed Blocks: ");
                             foreach (var seed in seed2)
                             {
-                                Console.WriteLine($"Seed: {string.Join("", Blocks.ConvertFromTelegraphCode(Blocks.LongToBlock(seed[0])))}");  
+                                Console.WriteLine($"Seed: {string.Join("", Blocks.ConvertFromTelegraphCode(Blocks.LongToBlock(seed)))}");  
                             }
                             Console.WriteLine();
 
@@ -137,20 +137,19 @@ namespace ConsoleApp1
                                 Console.WriteLine($"Internal States: {string.Join(", ", result.Item2)}");  // Выводим внутренние состояния
                             }
 
-                            //long a = 723482, c = 8677, m = 983609;
-                            //long initialState = value;
+                            // Работа wrap_C_HC_LCG
+                            string seed_for_wrap = "ААААББББВВВВГГГГ";
+                            var wrap_result = wrap_C_HC_LCG.Next(true, null, seed_for_wrap, set, oneWayFunction);
 
+                            string wrap_result_out = wrap_result.Item1;
 
+                            for (int i = 0; i < 8; i++)
+                            {
+                                wrap_result = wrap_C_HC_LCG.Next(false, wrap_result.Item2, null, set, null);
+                                 wrap_result_out = wrap_result_out + wrap_result.Item1;
+                            }
+                            Console.WriteLine("Результат финальной обёртки: " + wrap_result_out);
 
-                            //Console.WriteLine("Тест работы модифицированного генератора: ");
-                            //for (int i = 0; i < 10; i++)
-                            //{
-                            //    long output = enhGen.Next(initialState);
-                            //    int[] block = Blocks.LongToBlock(output);
-                            //    string text = Blocks.ConvertFromTelegraphCode(block);
-
-                            //    Console.WriteLine($"Итерация {i + 1}: {output} -> {text}");
-                            //}
 
                             break;
                         case ConsoleKey.Escape:
