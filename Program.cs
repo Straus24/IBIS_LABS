@@ -19,10 +19,20 @@ namespace ConsoleApp1
             string key = "РОЗА"; // Пример ключа для шифрования
             int j = 0; // Число холостых сдвигов j
 
+            Func<int[], string, int, int[]> oneWayFunction = Blocks.OneWayFunction;
+
+            // Параметры для генераторов
+            long[][] set = {
+                new long[] { 723482, 8677, 983609 },
+                new long[] { 252564, 9109, 961193 },
+                new long[] { 357630, 8971, 948209 }
+            };
+
             while (true)
             {
                 Console.WriteLine("\nВыберите номер задания:");
-                Console.WriteLine("1. Шифрование текста\n2. Шифрование текста методом S-блоков");
+                Console.WriteLine("1. Шифрование текста\n2. Шифрование текста методом S-блоков\n3. Работа односторонней функции\n4. Работа LCG-генератора" +
+                    "\n5. Работа модифицированного LCG-генератора\n6. Работа wrap_C_HC_LCG");
 
                 ConsoleKeyInfo choice = Console.ReadKey();
                 Console.WriteLine();
@@ -77,10 +87,10 @@ namespace ConsoleApp1
                             long value = Blocks.BlockToLong(plainTextCodes2);
                             int[] BitArray = Blocks.ToBinaryArray(value);
                             Console.WriteLine($"Блок = {string.Join("", plainTextCodes2)}");
-                            Console.WriteLine($"Блок в 64-битное число = {value}");
-                            Console.WriteLine($"Целое число в битах = {string.Join("", BitArray)}");
-                            Console.WriteLine($"Биты в 64-битное число = {Blocks.FromBinaryArray(BitArray)}");
-                            Console.WriteLine($"64-битное в блок = {string.Join("", Blocks.LongToBlock(Blocks.FromBinaryArray(BitArray)))}");
+                            //Console.WriteLine($"Блок в 64-битное число = {value}");
+                            //Console.WriteLine($"Целое число в битах = {string.Join("", BitArray)}");
+                            //Console.WriteLine($"Биты в 64-битное число = {Blocks.FromBinaryArray(BitArray)}");
+                            //Console.WriteLine($"64-битное в блок = {string.Join("", Blocks.LongToBlock(Blocks.FromBinaryArray(BitArray)))}");
 
                             // Работа односторонней функции
                             Console.Write("\nРабота односторонней функции: \n");
@@ -89,6 +99,8 @@ namespace ConsoleApp1
                             int[] resOneWay = Blocks.OneWayFunction(plainTextCodes2, constant, rounds);
                             Console.WriteLine($"{string.Join("", Blocks.ConvertFromTelegraphCode(resOneWay))}");
 
+                            break;
+                        case ConsoleKey.D4:
                             // Работа базового LCG
                             string TestString = "ЛУЛУ";
                             int a = 723482;
@@ -96,33 +108,31 @@ namespace ConsoleApp1
                             int m = 983609;
                             long Seed = Blocks.BlockToLong(Blocks.ConvertToTelegraphCode(TestString));
                             LCG BaseLCG = new LCG(a, c, m, Seed);
-                            Console.WriteLine("\nРабота базового LCG");
+                            //Console.WriteLine("\nРабота базового LCG");
                             Console.WriteLine($"Входное слово: {TestString}");
                             Console.Write($"Результат: {Blocks.ConvertFromTelegraphCode(Blocks.LongToBlock(BaseLCG.Next()))}\n");
 
+                            break;
+                        case ConsoleKey.D5:
                             // Работа EnhancedLCG
-                            Console.WriteLine("\nРабота модифицированного LCG");
+                            //Console.WriteLine("\nРабота модифицированного LCG");
                             string inputBlock = "КОЛА";
-                            Func<int[], string, int, int[]> oneWayFunction = Blocks.OneWayFunction;
+                            
 
                             int[] codes = Blocks.ConvertToTelegraphCode(inputBlock);
                             long[] longArray = codes.Select(x => (long)x).ToArray();
-                            long[][] seed2 = EnhancedLCG.make_seed(longArray, oneWayFunction);
-                            
+                            long[] seed2 = EnhancedLCG.make_seed(longArray, oneWayFunction);
+
+                            Console.WriteLine($"Входное слово: {inputBlock}");
                             // Вывод сгенерированных сидов
                             Console.WriteLine("\nSeed Blocks: ");
                             foreach (var seed in seed2)
                             {
-                                Console.WriteLine($"Seed: {string.Join("", Blocks.ConvertFromTelegraphCode(Blocks.LongToBlock(seed[0])))}");  
+                                Console.WriteLine($"Seed: {string.Join("", Blocks.ConvertFromTelegraphCode(Blocks.LongToBlock(seed)))}");  
                             }
                             Console.WriteLine();
 
-                            // Параметры для генераторов
-                            long[][] set = {
-                                new long[] { 723482, 8677, 983609 },
-                                new long[] { 252564, 9109, 961193 },
-                                new long[] { 357630, 8971, 948209 }
-                            };
+
 
                             // Основная часть работы LCG
                             EnhancedLCG enhLCG = new EnhancedLCG(seed2, set);
@@ -137,20 +147,23 @@ namespace ConsoleApp1
                                 Console.WriteLine($"Internal States: {string.Join(", ", result.Item2)}");  // Выводим внутренние состояния
                             }
 
-                            //long a = 723482, c = 8677, m = 983609;
-                            //long initialState = value;
+                            break;
 
+                        case ConsoleKey.D6:
 
+                            // Работа wrap_C_HC_LCG
+                            string seed_for_wrap = "ААААББББВВВВГГГГ";
+                            var wrap_result = wrap_C_HC_LCG.Next(true, null, seed_for_wrap, set, oneWayFunction);
 
-                            //Console.WriteLine("Тест работы модифицированного генератора: ");
-                            //for (int i = 0; i < 10; i++)
-                            //{
-                            //    long output = enhGen.Next(initialState);
-                            //    int[] block = Blocks.LongToBlock(output);
-                            //    string text = Blocks.ConvertFromTelegraphCode(block);
+                            string wrap_result_out = wrap_result.Item1;
 
-                            //    Console.WriteLine($"Итерация {i + 1}: {output} -> {text}");
-                            //}
+                            for (int i = 0; i < 8; i++)
+                            {
+                                wrap_result = wrap_C_HC_LCG.Next(false, wrap_result.Item2, null, set, null);
+                                 wrap_result_out = wrap_result_out + wrap_result.Item1;
+                            }
+                            Console.WriteLine("Результат финальной обёртки: " + wrap_result_out);
+
 
                             break;
                         case ConsoleKey.Escape:
