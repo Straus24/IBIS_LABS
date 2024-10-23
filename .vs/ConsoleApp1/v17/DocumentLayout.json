@@ -3,20 +3,12 @@
   "WorkspaceRootPath": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\blocks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|solutionrelative:blocks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|d:\\\u0438\u0431\u0438\u0441_2\\ibis_labs\\longtoint32 mass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|solutionrelative:longtoint32 mass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|d:\\\u0438\u0431\u0438\u0441_2\\ibis_labs\\enhancedlcg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|solutionrelative:enhancedlcg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|d:\\\u0438\u0431\u0438\u0441_2\\ibis_labs\\wrap_c_hc_lcg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|solutionrelative:wrap_c_hc_lcg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "LongToInt32 mass.cs",
-              "DocumentMoniker": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\LongToInt32 mass.cs",
-              "RelativeDocumentMoniker": "LongToInt32 mass.cs",
-              "ToolTip": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\LongToInt32 mass.cs",
-              "RelativeToolTip": "LongToInt32 mass.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T08:10:23.59Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "EnhancedLCG.cs",
-              "DocumentMoniker": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\EnhancedLCG.cs",
-              "RelativeDocumentMoniker": "EnhancedLCG.cs",
-              "ToolTip": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\EnhancedLCG.cs",
-              "RelativeToolTip": "EnhancedLCG.cs",
-              "ViewState": "AQIAAEwAAAAAAAAAAADwv2gAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T06:57:05.751Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Blocks.cs",
-              "DocumentMoniker": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\Blocks.cs",
-              "RelativeDocumentMoniker": "Blocks.cs",
-              "ToolTip": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\Blocks.cs",
-              "RelativeToolTip": "Blocks.cs",
-              "ViewState": "AQIAALoAAAAAAAAAAAArwMUAAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T07:03:33.677Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAGQAAAAAAAAAAAAIwIQAAAAAAAAA",
+              "ViewState": "AQIAAIAAAAAAAAAAAAAnwKEAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-15T12:41:16.173Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "wrap_C_HC_LCG.cs",
+              "DocumentMoniker": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\wrap_C_HC_LCG.cs",
+              "RelativeDocumentMoniker": "wrap_C_HC_LCG.cs",
+              "ToolTip": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\wrap_C_HC_LCG.cs",
+              "RelativeToolTip": "wrap_C_HC_LCG.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAAwBoAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-16T04:03:40.577Z",
               "EditorCaption": ""
             }
           ]
