@@ -16,7 +16,7 @@ namespace ConsoleApp1
             int[] binA = Blocks.ToBinaryArray(decA);
             int[] binB = Blocks.ToBinaryArray(decB);
             int[] binO = new int[binA.Length];
-            for (int i = 0; i < binA.Length - 1; i++)
+            for (int i = 0; i < binA.Length; i++)
             {
                 binO[i] = (binA[i] + binB[i]) % 2;
             }

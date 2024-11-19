@@ -202,6 +202,59 @@ namespace ConsoleApp1
 
                             break;
 
+                        case ConsoleKey.D9:
+                            Console.WriteLine("Работа рутинной функции Фейстеля");
+                            string in1 = "ГОР_СВЕТ";
+                            string in2 = "ЕГОР_КОТ";
+                            string Feistel_key = "ЗОЛОТУХА";
+                            Console.WriteLine(Feistel.Frw_Routine_Feistel(in1, Feistel_key, 0));
+                            Console.WriteLine(Feistel.Frw_Routine_Feistel(in2, Feistel_key, 0));
+
+                            Console.WriteLine(Feistel.Inv_Routine_Feistel("СВЕТЛРЩН", Feistel_key, 0));
+                            Console.WriteLine(Feistel.Inv_Routine_Feistel("_КОТДДАЗ", Feistel_key, 0));
+
+                            Console.WriteLine(Feistel.Frw_Inner_Feistel(in1, Feistel_key, 2));
+                            Console.WriteLine(Feistel.Frw_Inner_Feistel(in2, Feistel_key, 2));
+
+                            Console.WriteLine(Feistel.Inv_Inner_Feistel("ЛРЩНУЭЭХ", Feistel_key, 2));
+                            Console.WriteLine(Feistel.Inv_Inner_Feistel("ДДАЗЬТМЦ", Feistel_key, 2));
+
+                            Console.WriteLine(Feistel.Frw_Inner_FeistelM(in1, Feistel_key, 2));
+                            Console.WriteLine(Feistel.Frw_Inner_FeistelM(in2, Feistel_key, 2));
+
+                            Console.WriteLine(Feistel.Inv_Inner_FeistelM("ЕЖБЩНЬЯТ", Feistel_key, 2));
+                            Console.WriteLine(Feistel.Inv_Inner_FeistelM("ОЧДАЗЙАТ", Feistel_key, 2));
+
+
+                            Console.WriteLine("Работа раундовой функции Фейстеля");
+                            in1 = "КОРЫСТЬ_СЛОНА_ЭХ";
+                            in2 = "НУЖНО_БОЛЬШЕ_ПЫЩ";
+                            Feistel_key = "МТВ_ВСЕ_ЕЩЕ_ТЛЕН";
+
+                            Console.WriteLine(Feistel.round_Feistel(in1, Feistel_key));
+                            Console.WriteLine(Feistel.round_Feistel(in2, Feistel_key));
+
+
+                            string tmp1c = Feistel.swap_blocks(Feistel.round_Feistel(in1, Feistel_key));
+                            string tmp2c = Feistel.swap_blocks(Feistel.round_Feistel(in2, Feistel_key));
+
+                            Console.WriteLine(tmp1c);
+                            Console.WriteLine(tmp2c);
+
+                            string ltmp1c = Feistel.round_Feistel(tmp1c, Feistel_key);
+                            string ltmp2c = Feistel.round_Feistel(tmp2c, Feistel_key);
+
+                            Console.WriteLine(ltmp1c);
+                            Console.WriteLine(ltmp2c);
+
+                            string lout1c = Feistel.swap_blocks(ltmp1c);
+                            string lout2c = Feistel.swap_blocks(ltmp2c);
+
+                            Console.WriteLine(lout1c);
+                            Console.WriteLine(lout2c);
+
+                            break;
+
                         case ConsoleKey.Escape:
                             return;
                         default:

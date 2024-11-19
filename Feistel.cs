@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -75,6 +77,94 @@ namespace ConsoleApp1
             }
 
             return tmpA + tmpB;
+        }
+
+        public static string Frw_Routine_Feistel (string blockIn, string keyIn, int jIn)
+        {
+            int l = blockIn.Length;
+            string left = blockIn.Substring(0, l/2);
+            string right = blockIn.Substring(l/2, l/2);
+
+            int[] right_int = Blocks.ConvertToTelegraphCode(right);
+            int[] tmp = Blocks.FrwCesarM(right_int, keyIn, jIn);
+
+            string str_tmp = Blocks.ConvertFromTelegraphCode(tmp);
+            left = Blocks.add_txt(str_tmp, left);
+            return right + left;
+        }
+
+        public static string Inv_Routine_Feistel(string blockIn, string keyIn, int jIn)
+        {
+            int l = blockIn.Length;
+            string left = blockIn.Substring(0, l / 2);
+            string right = blockIn.Substring(l / 2, l / 2);
+
+            int[] left_int = Blocks.ConvertToTelegraphCode(left);
+            int[] tmp = Blocks.FrwCesarM(left_int, keyIn, jIn);
+
+            string str_tmp = Blocks.ConvertFromTelegraphCode(tmp);
+            right = Blocks.sub_txt(right, str_tmp);
+            return right + left;
+        }
+
+        public static string Frw_Inner_Feistel(string blockIn, string keyIn, int rIn)
+        {
+            string intermediate = blockIn;
+            for (int i = 0; i < rIn; i++)
+            {
+                intermediate = Frw_Routine_Feistel(intermediate, keyIn, i * 4);
+            }
+            return intermediate;
+        }
+
+        public static string Inv_Inner_Feistel(string blockIn, string keyIn, int rIn)
+        {
+            string intermediate = blockIn;
+            for (int i = 0; i < rIn; i++)
+            {
+                intermediate = Inv_Routine_Feistel(intermediate, keyIn, 4 * (rIn - i - 1));
+            }
+            return intermediate;
+        }
+
+        public static string Frw_Inner_FeistelM(string blockIn, string keyIn, int rIn)
+        {
+            string intermediate = blockIn;
+            string tmp;
+            for (int i = 0; i < rIn; i++)
+            {
+                tmp = Frw_Routine_Feistel(intermediate, keyIn, i * 4);
+                intermediate = Frw_P_Scitala(tmp);
+            }
+            return intermediate;
+        }
+
+        public static string Inv_Inner_FeistelM(string blockIn, string keyIn, int rIn)
+        {
+            string intermediate = blockIn;
+            string tmp;
+            for (int i = 0; i < rIn; i++)
+            {
+                tmp = Inv_P_Scitala(intermediate);
+                intermediate = Inv_Routine_Feistel(tmp, keyIn, 4 * (rIn - i - 1));
+            }
+            return intermediate;
+        }
+
+        public static string round_Feistel(string blockIn, string keyIn)
+        {
+            string left = blockIn.Substring(0, 8);
+            string right = blockIn.Substring(8, 8);
+            string tmp = Frw_Inner_FeistelM(right, keyIn, 4);
+            left = XOR.block_xor(tmp, left);
+            return right + left;
+        }
+
+        public static string swap_blocks(string blockIn)
+        {
+            string left = blockIn.Substring(0, 8);
+            string right = blockIn.Substring(8, 8);
+            return right + left;
         }
     }
 }
