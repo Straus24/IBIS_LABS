@@ -56,3 +56,17 @@ D:\ИБИС_2\IBIS_LABS\obj\Debug\net8.0\refint\ConsoleApp1.dll
 D:\ИБИС_2\IBIS_LABS\obj\Debug\net8.0\ConsoleApp1.pdb
 D:\ИБИС_2\IBIS_LABS\obj\Debug\net8.0\ConsoleApp1.genruntimeconfig.cache
 D:\ИБИС_2\IBIS_LABS\obj\Debug\net8.0\ref\ConsoleApp1.dll
+C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\bin\Debug\net8.0\ConsoleApp1.exe
+C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\bin\Debug\net8.0\ConsoleApp1.deps.json
+C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\bin\Debug\net8.0\ConsoleApp1.runtimeconfig.json
+C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\bin\Debug\net8.0\ConsoleApp1.dll
+C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\bin\Debug\net8.0\ConsoleApp1.pdb
+C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\obj\Debug\net8.0\ConsoleApp1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\obj\Debug\net8.0\ConsoleApp1.AssemblyInfoInputs.cache
+C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\obj\Debug\net8.0\ConsoleApp1.AssemblyInfo.cs
+C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\obj\Debug\net8.0\ConsoleApp1.csproj.CoreCompileInputs.cache
+C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\obj\Debug\net8.0\ConsoleApp1.dll
+C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\obj\Debug\net8.0\refint\ConsoleApp1.dll
+C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\obj\Debug\net8.0\ConsoleApp1.pdb
+C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\obj\Debug\net8.0\ConsoleApp1.genruntimeconfig.cache
+C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\obj\Debug\net8.0\ref\ConsoleApp1.dll

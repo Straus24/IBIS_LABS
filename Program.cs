@@ -32,7 +32,7 @@ namespace ConsoleApp1
             {
                 Console.WriteLine("\nВыберите номер задания:");
                 Console.WriteLine("1. Шифрование текста\n2. Шифрование текста методом S-блоков\n3. Работа односторонней функции\n4. Работа LCG-генератора" +
-                    "\n5. Работа модифицированного LCG-генератора\n6. Работа wrap_C_HC_LCG\n7. Работа XOR + Round_Keys");
+                    "\n5. Работа модифицированного LCG-генератора\n6. Работа wrap_C_HC_LCG\n7. Работа XOR + Round_Keys\n8. Шифр перестановки Скитала");
 
                 ConsoleKeyInfo choice = Console.ReadKey();
                 Console.WriteLine();
@@ -184,11 +184,30 @@ namespace ConsoleApp1
                             string round_key = "ПОЛИМАТ_ТЕХНОБОГ";
                             Console.WriteLine("Round_Keys: " + Round_Keys.produce_round_keys(round_key, 5, oneWayFunction));
                             break;
+
+                        case ConsoleKey.D8:
+                            Console.WriteLine("Работа функции Скитала");
+                            Console.WriteLine(Feistel.Frw_P_Scitala("ДЖИГУРДА"));
+                            Console.WriteLine(Feistel.Frw_P_Scitala("ДЖИГУРДАЯ"));
+                            Console.WriteLine(Feistel.Frw_P_Scitala("АЭРОСМИТ"));
+                            Console.WriteLine(Feistel.Frw_P_Scitala("БАЭРОСМИТ"));
+
+                            Console.WriteLine();
+
+                            Console.WriteLine("Обратное преобразование");
+                            Console.WriteLine(Feistel.Inv_P_Scitala("ДУРЖИДАГ"));
+                            Console.WriteLine(Feistel.Inv_P_Scitala("ДРДЖИАЯГУ"));
+                            Console.WriteLine(Feistel.Inv_P_Scitala("АСМЭРИТО"));
+                            Console.WriteLine(Feistel.Inv_P_Scitala("БСМАЭИТРО"));
+
+                            break;
+
                         case ConsoleKey.Escape:
                             return;
                         default:
                             Console.WriteLine("Неверный выбор. Попробуйте еще раз.");
                             break;
+
                     }
                 }
                 catch (Exception ex)
