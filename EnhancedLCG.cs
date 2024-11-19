@@ -24,7 +24,7 @@ namespace ConsoleApp1
             long second = lcg2.Next();
             long control = lcg3.Next();
 
-            Console.WriteLine($"Sa {first} Sb {second} Sc {control} ");
+            //Console.WriteLine($"Sa {first} Sb {second} Sc {control} ");
 
             int n = count_unity_bits(control);
             long output;
