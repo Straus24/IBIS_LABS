@@ -70,3 +70,4 @@ C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\obj\Debug\net8
 C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\obj\Debug\net8.0\ConsoleApp1.pdb
 C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\obj\Debug\net8.0\ConsoleApp1.genruntimeconfig.cache
 C:\Users\Виктория\Downloads\IBIS_LABS-Lab3\IBIS_LABS-Lab3\obj\Debug\net8.0\ref\ConsoleApp1.dll
+C:\Users\Виктория\Desktop\Study\4 курс\БИС\IBIS_LABS-main\obj\Debug\net8.0\ConsoleApp1.sourcelink.json

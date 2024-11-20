@@ -32,7 +32,8 @@ namespace ConsoleApp1
             {
                 Console.WriteLine("\nВыберите номер задания:");
                 Console.WriteLine("1. Шифрование текста\n2. Шифрование текста методом S-блоков\n3. Работа односторонней функции\n4. Работа LCG-генератора" +
-                    "\n5. Работа модифицированного LCG-генератора\n6. Работа wrap_C_HC_LCG\n7. Работа XOR + Round_Keys\n8. Шифр перестановки Скитала");
+                    "\n5. Работа модифицированного LCG-генератора\n6. Работа wrap_C_HC_LCG\n7. Работа XOR + Round_Keys\n8. Шифр перестановки Скитала\n9. Раундовая и рутинная функции Фейстеля" +
+                    "\nQ. Работа обертки для петли Фейстеля");
 
                 ConsoleKeyInfo choice = Console.ReadKey();
                 Console.WriteLine();
@@ -199,6 +200,81 @@ namespace ConsoleApp1
                             Console.WriteLine(Feistel.Inv_P_Scitala("ДРДЖИАЯГУ"));
                             Console.WriteLine(Feistel.Inv_P_Scitala("АСМЭРИТО"));
                             Console.WriteLine(Feistel.Inv_P_Scitala("БСМАЭИТРО"));
+
+                            break;
+
+                        case ConsoleKey.D9:
+                            Console.WriteLine("Работа рутинной функции Фейстеля");
+                            string in1 = "ГОР_СВЕТ";
+                            string in2 = "ЕГОР_КОТ";
+                            string Feistel_key = "ЗОЛОТУХА";
+                            Console.WriteLine(Feistel.Frw_Routine_Feistel(in1, Feistel_key, 0));
+                            Console.WriteLine(Feistel.Frw_Routine_Feistel(in2, Feistel_key, 0));
+
+                            Console.WriteLine(Feistel.Inv_Routine_Feistel("СВЕТЛРЩН", Feistel_key, 0));
+                            Console.WriteLine(Feistel.Inv_Routine_Feistel("_КОТДДАЗ", Feistel_key, 0));
+
+                            Console.WriteLine(Feistel.Frw_Inner_Feistel(in1, Feistel_key, 2));
+                            Console.WriteLine(Feistel.Frw_Inner_Feistel(in2, Feistel_key, 2));
+
+                            Console.WriteLine(Feistel.Inv_Inner_Feistel("ЛРЩНУЭЭХ", Feistel_key, 2));
+                            Console.WriteLine(Feistel.Inv_Inner_Feistel("ДДАЗЬТМЦ", Feistel_key, 2));
+
+                            Console.WriteLine(Feistel.Frw_Inner_FeistelM(in1, Feistel_key, 2));
+                            Console.WriteLine(Feistel.Frw_Inner_FeistelM(in2, Feistel_key, 2));
+
+                            Console.WriteLine(Feistel.Inv_Inner_FeistelM("ЕЖБЩНЬЯТ", Feistel_key, 2));
+                            Console.WriteLine(Feistel.Inv_Inner_FeistelM("ОЧДАЗЙАТ", Feistel_key, 2));
+
+
+                            Console.WriteLine("Работа раундовой функции Фейстеля");
+                            in1 = "КОРЫСТЬ_СЛОНА_ЭХ";
+                            in2 = "НУЖНО_БОЛЬШЕ_ПЫЩ";
+                            Feistel_key = "МТВ_ВСЕ_ЕЩЕ_ТЛЕН";
+
+                            Console.WriteLine(Feistel.round_Feistel(in1, Feistel_key));
+                            Console.WriteLine(Feistel.round_Feistel(in2, Feistel_key));
+
+
+                            string tmp1c = Feistel.swap_blocks(Feistel.round_Feistel(in1, Feistel_key));
+                            string tmp2c = Feistel.swap_blocks(Feistel.round_Feistel(in2, Feistel_key));
+
+                            Console.WriteLine(tmp1c);
+                            Console.WriteLine(tmp2c);
+
+                            string ltmp1c = Feistel.round_Feistel(tmp1c, Feistel_key);
+                            string ltmp2c = Feistel.round_Feistel(tmp2c, Feistel_key);
+
+                            Console.WriteLine(ltmp1c);
+                            Console.WriteLine(ltmp2c);
+
+                            string lout1c = Feistel.swap_blocks(ltmp1c);
+                            string lout2c = Feistel.swap_blocks(ltmp2c);
+
+                            Console.WriteLine(lout1c);
+                            Console.WriteLine(lout2c);
+
+                            break;
+
+                        case ConsoleKey.Q:
+                            Console.WriteLine("Многораундовый алгоритм с петлей Фейстеля");
+                            in1 = "КОРЫСТЬ_СЛОНА_ЭХ";
+                            in2 = "НУЖНО_БОЛЬШЕ_ПЫЩ";
+                            key = "МТВ_ВСЕ_ЕЩЕ_ТЛЕН";
+
+                            string out1cf = Feistel.Frw_Feistel(in1, key, oneWayFunction, 6);
+                            string out2cf = Feistel.Frw_Feistel(in2, key, oneWayFunction, 6);
+
+                            Console.WriteLine($"{in1} - {out1cf}");
+                            Console.WriteLine($"{in2} - {out2cf}");
+
+                            Console.WriteLine("Обратное преобразование");
+
+                            string lout1cf = Feistel.Inv_Feistel(out1cf, key, oneWayFunction, 6);
+                            string lout2cf = Feistel.Inv_Feistel(out2cf, key, oneWayFunction, 6);
+
+                            Console.WriteLine($"{out1cf} - {lout1cf}");
+                            Console.WriteLine($"{out2cf} - {lout2cf}");
 
                             break;
 

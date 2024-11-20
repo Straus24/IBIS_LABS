@@ -371,5 +371,83 @@ namespace ConsoleApp1
                 Console.WriteLine("\nNo avalanche effect: Only one character was changed in the ciphertext.");
             }
         }
+
+        public static string add_txt(string T1_IN, string T2_IN)
+        {
+            string T_IN = "";
+            string result = "";
+            int m = Math.Min(T1_IN.Length, T2_IN.Length);
+            if (T1_IN.Length > T2_IN.Length)
+            {
+                T_IN = T1_IN;
+            }
+            else
+            {
+                T_IN = T2_IN;
+            }
+            int M = T_IN.Length;
+            for (int i = 0; i < m; i++)
+            {
+                string t1 = T1_IN.Substring(i, 1);
+                string t2 = T2_IN.Substring(i, 1);
+                result = result + alphabet.GetSymbolByCode(alphabet.SumCode(alphabet.GetCode(t1[0]), alphabet.GetCode(t2[0])));
+            }
+            string t = "";
+            if (M > m)
+            {
+                for (int i = m; i < M; i++)
+                {
+                    t = T_IN.Substring(i, 1);
+                    result = result + t;
+                }
+            }
+
+            return result;
+        }
+
+        public static string sub_txt(string T1_IN, string T2_IN)
+        {
+            string T_IN = "";
+            string result = "";
+            int m = Math.Min(T1_IN.Length, T2_IN.Length);
+            int flag = -1;
+            if (T1_IN.Length > T2_IN.Length)
+            {
+                T_IN = T1_IN;
+                flag = 0;
+            }
+            else
+            {
+                T_IN = T2_IN;
+                flag = 1;
+            }
+            int M = T_IN.Length;
+            for (int i = 0; i < m; i++)
+            {
+                string t1 = T1_IN.Substring(i, 1);
+                string t2 = T2_IN.Substring(i, 1);
+                result = result + alphabet.GetSymbolByCode(alphabet.SubtractCode(alphabet.GetCode(t1[0]), alphabet.GetCode(t2[0])));
+            }
+            string t = "";
+            if (M > m)
+            {
+                for (int i = m; i < M; i++)
+                {
+                    string d = "_";
+                    t = T_IN.Substring(i, 1);
+                    if (flag == 1)
+                    {
+                        result = result + alphabet.GetSymbolByCode(alphabet.SubtractCode(alphabet.GetCode(d[0]), alphabet.GetCode(t[0])));
+                    }
+                    else
+                    {
+                        result = result + alphabet.GetSymbolByCode(alphabet.SubtractCode(alphabet.GetCode(t[0]), alphabet.GetCode(d[0])));
+                    }
+                    
+                }
+            }
+
+            return result;
+        }
     }
 }
