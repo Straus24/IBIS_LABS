@@ -13,6 +13,7 @@ namespace ConsoleApp1
         {
             _alphabet = new Dictionary<char, byte>
 {
+                { '_', 0b00000 },
                 { 'А', 0b00001 },
                 { 'Б', 0b00010 },
                 { 'В', 0b00011 },
@@ -137,12 +138,12 @@ namespace ConsoleApp1
 
         public int SumCode(int code1, int code2)
         {
-            return (code1 + code2 - 1) % 31 + 1; // Сложение и циклический сдвиг
+            return (code1 + code2) % 32; // Сложение и циклический сдвиг
         }
 
         public int SubtractCode(int code1, int code2)
         {
-            return (code1 - code2 + 30) % 31 + 1; // Вычитание и циклический сдвиг
+            return (code1 - code2 + 32) % 32; // Вычитание и циклический сдвиг
         }
 
         public char GetSymbolByCode(int code)
