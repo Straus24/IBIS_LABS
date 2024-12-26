@@ -372,8 +372,15 @@ namespace ConsoleApp1
                             Console.WriteLine(C1);
                             Console.WriteLine(C2);
 
+                            int[][] CHANNEL = CCM.CCM_SEND(assocDataArray[3], inputLines, "СЕАНСОВЫЙ_КЛЮЧИК", "СЕМИХАТОВ_КВАНТЫ", oneWayFunction);
+                            List<object> TRANSMISSIOM = CCM.CCM_RECEIVE(assocDataArray[3], CHANNEL, "СЕАНСОВЫЙ_КЛЮЧИК", "СЕМИХАТОВ_КВАНТЫ", oneWayFunction);
+
                             break;
 
+                        case ConsoleKey.E:
+                            
+                            
+                            break;
                         case ConsoleKey.Escape:
                             return;
                         default:

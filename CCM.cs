@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -100,7 +103,7 @@ namespace ConsoleApp1
             string mac = p.Substring(48 + L, M - (48 + L));
 
             // Формирование результата
-            var metadata = new List<string> { type, sender, receiver, session, lengthField };
+            string[] metadata = { type, sender, receiver, session, lengthField };
             return new List<object> { metadata, iv, message, mac };
         }
 
@@ -142,6 +145,194 @@ namespace ConsoleApp1
                 result += Blocks.ConvertFromTelegraphCode(cBlocks);
             }
 
+            return result;
+        }
+
+        public static string enc_CTR(string MSG_IN, string IV_IN, string KEY_IN, Func<int[], string, int, int[]> sFun ,int r_in)
+        {
+            int m = MSG_IN.Length/16;
+            string IV_starter = IV_IN.Substring(0, 12);
+            int ctr = 0;
+            string result = "";
+            for (int i = 0; i < m; i++)
+            {
+                string IV_ender = Blocks.ConvertFromTelegraphCode(Blocks.LongToBlock(ctr));
+                string IV = IV_starter + IV_ender;
+                string keystream = Feistel.Frw_Feistel(IV, KEY_IN, sFun ,r_in);
+                string inp = MSG_IN.Substring(i * 16, 16);
+                result = result + TextXor(inp, keystream);
+                ctr = ctr + 1;
+            }
+            return result;
+        }
+
+        public static string mac_CBC(string MSG_IN, string IV_IN, string KEY_IN, Func<int[], string, int, int[]> sFun, int r_in)
+        {
+            int m = MSG_IN.Length / 16;
+            int ctr = 0;
+            string result = "";
+            string feedback = IV_IN;
+            for (int i = 0; i < m; i++)
+            {
+                string inp = MSG_IN.Substring(i * 16, 16);
+                string temp = TextXor(feedback, inp);
+                feedback = Feistel.Frw_Feistel(temp, KEY_IN, sFun ,r_in);
+                result = result + feedback;
+            }
+            return feedback; // Возможно ошибка и нужно возвращать result
+        }
+
+        public static string combine(string[] STRSET_IN)
+        {
+            string result = "";
+            for (int i = 0; i < STRSET_IN.Length; i++)
+            {
+                result = result + STRSET_IN[i];
+            }
+            return result;
+        }
+
+        public static List<object> CCM_frw(string[] AD, string IV_IN, string INPUTS_ARRAY, string KEY_IN,  int onlymac, Func<int[], string, int, int[]> sFun, int r_in)
+        {
+            string data = combine(AD);
+            int M = INPUTS_ARRAY.Length;
+            string mac = mac_CBC(data + INPUTS_ARRAY, IV_IN, KEY_IN, sFun, r_in);
+            string MSG;
+            string MAC;
+            if (onlymac == 0)
+            {
+                string msg = enc_CTR(INPUTS_ARRAY+mac, IV_IN, KEY_IN, sFun, r_in);
+                MSG = msg.Substring(0, M);
+                MAC = msg.Substring(M, 16);
+            }
+            else
+            {
+                MSG = INPUTS_ARRAY.ToString();
+                MAC = mac;
+            }
+            List<object> result = new List<object>();
+            result.Add(AD);
+            result.Add(IV_IN);
+            result.Add(MSG);
+            result.Add(MAC);
+            return result;
+        }
+
+        public static List<object> CCM_inv(string[] AD, string IV_IN, string INPUTS_ARRAY, string MAC_IN ,string KEY_IN, int onlymac, Func<int[], string, int, int[]> sFun, int r_in)
+        {
+            string data = combine(AD);
+            int M = INPUTS_ARRAY.Length;
+            string MSG;
+            string MAC;
+            if (onlymac == 0)
+            {
+                string msg = enc_CTR(INPUTS_ARRAY + MAC_IN, IV_IN, KEY_IN, sFun, r_in);
+                 MSG = msg.Substring(0, M);
+                 MAC = msg.Substring (M, 16);
+            }
+            else
+            {
+                 MSG = INPUTS_ARRAY;
+                 MAC = MAC_IN;
+            }
+            string mac = mac_CBC(data + MSG, IV_IN, KEY_IN, sFun, r_in);
+            MAC = TextXor(MAC, mac);
+            List<object> result = new List<object>();
+            result.Add(AD);
+            result.Add(IV_IN);
+            result.Add(MSG);
+            result.Add(MAC);
+            return result;
+        }
+
+        public static int[][] CCM_SEND(string[] ASS_DATA, string[] MSG_ARRAY, string KEY_IN, string nonce, Func<int[], string, int, int[]> sFun)
+        {
+            string t1 = ASS_DATA[2] + ASS_DATA[1];
+            string t2 = ASS_DATA[0] + ASS_DATA[3] + "____";
+            string t3 = Blocks.add_txt(Blocks.add_txt(t1, t2), nonce);
+            string IV0 = t3.Substring(0, 8) + t3.Substring(12, 4) + t3.Substring(12, 4);
+            int msg_counter = -1;
+            string keyset = Round_Keys.produce_round_keys(KEY_IN, 8, sFun);
+            int[][] result = new int[MSG_ARRAY.Length][];
+            List<object> tmp_packet = new List<object>();
+            List<object> sec_packet = new List<object>();
+            for (int i = 0; i < MSG_ARRAY.Length; i++)
+            {
+                string msg_sec = ASS_DATA[0];
+                msg_counter = msg_counter + 1;
+                string IV1 = "________" + Blocks.ConvertFromTelegraphCode(Blocks.LongToBlock(msg_counter)) + "____";
+                string IV = TextXor(IV0, IV1);
+                tmp_packet = PreparePacket([msg_sec, ASS_DATA[1], ASS_DATA[2], ASS_DATA[3]], IV, MSG_ARRAY[i]);
+                if (msg_sec == "В_")
+                {
+                    result[i] = Transmit(tmp_packet);
+                }
+                if (msg_sec == "ВА")
+                {
+                   sec_packet = CCM_frw([msg_sec, ASS_DATA[1], ASS_DATA[2], ASS_DATA[3]], IV, MSG_ARRAY[i], keyset, 1, sFun, 6);
+                   result[i] = Transmit(sec_packet);
+                }
+                if (msg_sec=="ВБ")
+                {
+                    sec_packet = CCM_frw([msg_sec, ASS_DATA[1], ASS_DATA[2], ASS_DATA[3]], IV, MSG_ARRAY[i], keyset, 0, sFun, 6);
+                    result[i] = Transmit(sec_packet);
+                }
+
+            }
+            return result;
+        }
+        public static List<object> CCM_RECEIVE(string[] ASS_DATA, int[][] MSG_ARRAY, string KEY_IN, string nonce, Func<int[], string, int, int[]> sFun)
+        {
+            List<object> result = new List<object>();
+            long last = -1;
+            for (int i = 0; i < MSG_ARRAY.Length; i++)
+            {
+                List<object> rec_packet = new List<object>();
+                List<object> tmp_packet = Recieve(MSG_ARRAY[i]);
+                string[] rdata = (string[])tmp_packet[0];
+                string x1 = tmp_packet[1].ToString().Substring(12,4);
+                string x2 = tmp_packet[1].ToString().Substring(8, 4);
+                long current = Blocks.BlockToLong(Blocks.ConvertToTelegraphCode(XOR.block_xor(x1, x2)));
+                if (current > last)
+                {
+                    if (rdata[0] == "ВБ")
+                    {
+                        rec_packet = CCM_inv((string[])tmp_packet[0], (string)tmp_packet[1], (string)tmp_packet[2], (string)tmp_packet[3] ,KEY_IN, 0, sFun, 6);
+                        rec_packet[2] = Padding.UnpadMessage((string)rec_packet[2]);
+                        if (rec_packet[3] == "________________")
+                        {
+                            last = current;
+                            rec_packet[3] = "OK";
+                        }
+                    }
+                    else if (rdata[0] == "ВА" && ASS_DATA[0] != "ВБ")
+                    {
+                        rec_packet = CCM_inv((string[])tmp_packet[0], (string)tmp_packet[1], (string)tmp_packet[2], (string)tmp_packet[3], KEY_IN, 1, sFun, 6);
+                        rec_packet[2] = Padding.UnpadMessage((string)rec_packet[2]);
+                        if (rec_packet[3] == "________________")
+                        {
+                            last = current;
+                            rec_packet[3] = "OK";
+                        }
+                    }
+                    else if (rdata[0] == "В_" && ASS_DATA[0] == "В_")
+                    {
+                        rec_packet = tmp_packet;
+                        rec_packet[2] = Padding.UnpadMessage((string)rec_packet[2]);
+                        if (rec_packet[3] == "")
+                        {
+                            last = current;
+                            rec_packet[3] = "N/A";
+                        }
+                    }
+                    else
+                    {
+                        rec_packet = tmp_packet;
+                    }
+                    result.Add(rec_packet);
+                }
+
+            }
             return result;
         }
     }

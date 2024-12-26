@@ -1,18 +1,30 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\",
+  "WorkspaceRootPath": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|c:\\users\\\u0430\u0434\u043C\u0438\u043D\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0438\u0431\u0438\u0441\\consoleapp1\\ibis_labs\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\alphabet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|solutionrelative:alphabet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|d:\\\u0438\u0431\u0438\u0441_2\\ibis_labs\\ccm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|solutionrelative:ccm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\cesar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|solutionrelative:cesar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\feistel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|solutionrelative:feistel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\round_keys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|solutionrelative:round_keys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\xor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|solutionrelative:xor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\wrap_c_hc_lcg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1DCB8C1-86EA-40C5-8579-6936946523B9}|ConsoleApp1.csproj|solutionrelative:wrap_c_hc_lcg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,41 +34,81 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CESAR.cs",
-              "DocumentMoniker": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\CESAR.cs",
-              "RelativeDocumentMoniker": "CESAR.cs",
-              "ToolTip": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\CESAR.cs",
-              "RelativeToolTip": "CESAR.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "DocumentIndex": 5,
+              "Title": "wrap_C_HC_LCG.cs",
+              "DocumentMoniker": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\wrap_C_HC_LCG.cs",
+              "RelativeDocumentMoniker": "wrap_C_HC_LCG.cs",
+              "ToolTip": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\wrap_C_HC_LCG.cs",
+              "RelativeToolTip": "wrap_C_HC_LCG.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T12:45:59.512Z"
+              "WhenOpened": "2024-12-25T16:42:07.825Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Feistel.cs",
+              "DocumentMoniker": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\Feistel.cs",
+              "RelativeDocumentMoniker": "Feistel.cs",
+              "ToolTip": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\Feistel.cs",
+              "RelativeToolTip": "Feistel.cs",
+              "ViewState": "AQIAAKMAAAAAAAAAAAAAAKkAAABmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-25T11:09:11.576Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Round_Keys.cs",
+              "DocumentMoniker": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\Round_Keys.cs",
+              "RelativeDocumentMoniker": "Round_Keys.cs",
+              "ToolTip": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\Round_Keys.cs",
+              "RelativeToolTip": "Round_Keys.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-25T10:52:47.422Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "XOR.cs",
+              "DocumentMoniker": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\XOR.cs",
+              "RelativeDocumentMoniker": "XOR.cs",
+              "ToolTip": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\XOR.cs",
+              "RelativeToolTip": "XOR.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAuwA0AAABVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-25T11:02:43.981Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ALPHABET.cs",
-              "DocumentMoniker": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\ALPHABET.cs",
-              "RelativeDocumentMoniker": "ALPHABET.cs",
-              "ToolTip": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\ALPHABET.cs",
-              "RelativeToolTip": "ALPHABET.cs",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAwwFsAAAAmAAAA",
+              "Title": "CCM.cs",
+              "DocumentMoniker": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\CCM.cs",
+              "RelativeDocumentMoniker": "CCM.cs",
+              "ToolTip": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\CCM.cs",
+              "RelativeToolTip": "CCM.cs",
+              "ViewState": "AQIAAAABAAAAAAAAAAAAAA8BAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T12:41:46.938Z"
+              "WhenOpened": "2024-12-25T10:48:03.303Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\Program.cs",
+              "DocumentMoniker": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\\u0410\u0434\u043C\u0438\u043D\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\\u0418\u0411\u0418\u0421\\ConsoleApp1\\IBIS_LABS\\Program.cs",
+              "ToolTip": "D:\\\u0418\u0411\u0418\u0421_2\\IBIS_LABS\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAkAAAA",
+              "ViewState": "AQIAAFYBAAAAAAAAAAAAAHABAAA8AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-15T12:41:16.173Z",
               "EditorCaption": ""
